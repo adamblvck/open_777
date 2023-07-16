@@ -13,17 +13,19 @@ import { TableColumns, TableIndex } from './structure';
 import { Liber777 } from './liber_777';
 import { DarkTheme } from './dark';
 
+import _ from 'lodash';
+
 function App() {
 
 	const [showSearch, setShowSearch] = React.useState(false);
 	const onSearchClose = React.useCallback(() => setShowSearch(false), []);
 
+	const [columns, setColumns] = React.useState(TableColumns);
+
 	const getContent = React.useCallback( cell => {
 		const [col, row] = cell;
 		const dataRow = Liber777[row];
 		// dumb but simple way to do this
-
-		console.log (col, row, TableIndex[col], dataRow);
 
 		const d = dataRow[ TableIndex[col]];
 		return {
@@ -59,6 +61,20 @@ function App() {
 		return text_color;
 	}
 
+	const handleColumnResize = (column, newSize) => {
+		console.log("event", column, newSize);
+
+		setColumns(prevCols => {
+			const index = _.findIndex(prevCols, { id: column.id });
+			const newCols = [...prevCols];
+			newCols.splice(index, 1, {
+				...prevCols[index],
+				width: newSize,
+			});
+			return newCols;
+		});
+	}
+
 	return (
 		<div className="App">
 			<div className="App-header">
@@ -83,6 +99,8 @@ function App() {
 					<DataEditor
 						theme={DarkTheme}
 
+						onColumnResize={handleColumnResize}
+
 						freezeColumns={1}
 						experimental={{hyperWrapping:true}}
 
@@ -92,7 +110,7 @@ function App() {
 						onSearchClose={onSearchClose}
 						className="data"
 						getCellContent={getContent}
-						columns={TableColumns}
+						columns={columns}
 						rows={Liber777.length}
 
 						drawCell={args => {
