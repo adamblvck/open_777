@@ -1,10 +1,91 @@
+body {
+  background-color: #282c34;
+  height: 100%;
+  margin: 0;
+}
+
 .App {
   text-align: center;
+  background-color: #282c34;
+  height: 100vmin;
+  margin: 0;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.toolbar {
+  /* position: relative; */
+  /* top: -32px; */
+  align-self: center;
+  flex: 0 1 auto;
+  margin-bottom: 10px;
+}
+
+.dataContainer {
+  margin: 10;
+  flex: 0 1 auto;
+  width:100%;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.search {
+  background-color: #fff0;
+  color: white;
+  padding: 5px 5px;
+  border-radius: 10px;
+  cursor: pointer;
+
+  position: absolute;
+  right: 25px;
+  top: 25px;
+}
+
+.logoContainer {
+  position: absolute;
+  left: 25px;
+  top: 15px;
+}
+
+.logoContainer img {
+  height: 55px;
+  width: 55px;
+}
+
+.iconContainer {
+  height: 19px;
+  width: 19px;
+}
+
+.footer {
+  flex: 0 1 20px;
+  font-family: 'philosopher';
+  color:#eee;
+  font-size: 15px;
+}
+
+.data {
+  flex: 1 1 auto;
+}
+
+.title {
+  background-color: #0000;
+  border-width: 0px;
+  color:#eee;
+  font-size: 44px;
+  font-family: 'philosopher';
+}
+
+.subtitle {
+  background-color: #0000;
+  border-width: 0px;
+  color:#eee;
+  font-size: 18px;
+  font-family: 'philosopher';
+  font-weight: 400;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -15,13 +96,21 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   font-size: calc(10px + 2vmin);
-  color: white;
+  /* color: white; */
+  border-width: 0px;
+
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .App-link {
@@ -35,4 +124,39 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.test {
+color: #FFFFFF;
+color: #87CEEB;
+color: #DC143C;
+color: #9400D3;
+color: #FFA500;
+color: #FFE1FF;
+color: #FFBF00;
+color: #A020F0;
+color: #4B0082;
+color: #FFFF00;
+color: #FFFF9D;
+color: #FFFF00;
+color: #0000FF;
+color: #00C957;
+color: #FF2400;
+color: #FF4500;
+color: #FFA500;
+color: #FFBF00;
+color: #ADFF2F;
+color: #ADFF2F;
+color: #EE82EE;
+color: #00C957;
+color: #00008B;
+color: #006400;
+color: #0000FF;
+color: #4B0082;
+color: #FF2400;
+color: #EE82EE;
+color: #8A2BE2;
+color: #FFA500;
+color: #FF4500;;
+color: #4B0082;;
 }
