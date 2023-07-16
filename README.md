@@ -1,6 +1,12 @@
 # Open 777
 
+<p align="center">
+  <img width="120" height="120" src="./public/logo_full_icon_transparent.png">
+</p>
+
 ### 🜁🜂 Visit [Open 777 Here](https://adamblvck.github.io/open_777/) 🜄🜃
+
+![](./docs/screenshot.png)
 
 ## About
 
