@@ -6,7 +6,7 @@
 
 ### 🜁🜂 Visit [Open 777 Here](https://adamblvck.github.io/open_777/) 🜄🜃
 
-![](./docs/screenshot.png)
+![](./docs/screenshot.jpg)
 
 ## About
 
