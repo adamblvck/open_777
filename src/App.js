@@ -140,7 +140,7 @@ function App() {
 					/>
 				</div>
 
-				<div className="footer">Made with ❤️ by ADAM BLVCK | Source Code</div>
+				<div className="footer">Made with ❤️ by ADAM BLVCK | <a className="opensourcelink" href="https://github.com/adamblvck/open_777">Open Source</a></div>
 			</div>
 		</div>
 	);

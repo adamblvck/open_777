@@ -11,6 +11,10 @@ body {
   margin: 0;
 }
 
+.opensourcelink {
+  color: #eee;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
