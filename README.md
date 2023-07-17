@@ -12,7 +12,7 @@
 
 Open 777 is a small online website for easily looking up Crowley's Esoteric Kabbalistic correspondences, meant for Esoteric Study & Practice.
 
-The website consists of transcriptions done by ADAM BLVCK from the now in open-domain book "777" by Aleister Crowley. Since looking up online correspondences can be a true hassle, and since no courated dataset of these correspondences could be found (which in itself is a treasure mine for enhancing AI-models), I decided to create one.
+The website consists of transcriptions done by ADAM BLVCK from the now in open-domain book "777" by Aleister Crowley. Since looking up of correspondences in the actual book can be quite tedious, and since no courated dataset of these correspondences could be found (which in itself is a treasure mine for enhancing AI-tools), I decided to create one.
 
 ## The Website
 
@@ -20,7 +20,7 @@ In the books, the tables of correspondences is organized in 32 rows which repres
 
 The website uses [Glide Data Grid](https://github.com/glideapps/glide-data-grid) which is most suitable for this purpose, and includes search-functionality across the whole table.
 
-## Data
+## The Data
 
 The to-transcribe data is huge, and thus this website will be updated every few days until all correspondences are covered. If you think you can help with transcription, please message me here or at contact@adamblvck.com.
 

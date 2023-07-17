@@ -80,7 +80,7 @@ function App() {
 			<div className="App-header">
 				<div className="toolbar">
 					<div className="title">Open 777</div>
-					<div className="subtitle">Online Look-up & Reference Tool for Aleister Crowley's 'balistic correspondences </div>
+					<div className="subtitle">Online Look-up & Reference Tool for Aleister Crowley's Kabbalistic Correspondences</div>
 				</div>
 				
 				
