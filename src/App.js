@@ -28,6 +28,7 @@ function App() {
 		// dumb but simple way to do this
 
 		const d = dataRow[ TableIndex[col]];
+
 		return {
 			kind: GridCellKind.Text,
 			allowOverlay: false,
@@ -62,8 +63,6 @@ function App() {
 	}
 
 	const handleColumnResize = (column, newSize) => {
-		console.log("event", column, newSize);
-
 		setColumns(prevCols => {
 			const index = _.findIndex(prevCols, { id: column.id });
 			const newCols = [...prevCols];
@@ -117,7 +116,8 @@ function App() {
 							const { cell, rect, ctx } = args;
 
 							const cellColor = cell.displayData;
-
+							
+							if (cellColor == undefined) return;
 							if (cellColor.charAt(0) != "#") return false;
 			
 							ctx.save();
