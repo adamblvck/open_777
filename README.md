@@ -12,7 +12,11 @@
 
 Open 777 is a small online website for easily looking up Crowley's Esoteric Kabbalistic correspondences, meant for Esoteric Study & Practice.
 
-The website consists of transcriptions done by ADAM BLVCK from the now in open-domain book "777" by Aleister Crowley. Since looking up of correspondences in the actual book can be quite tedious, and since no courated dataset of these correspondences could be found (which in itself is a treasure mine for enhancing AI-tools), I decided to create one.
+The website consists of transcriptions done by [ADAM BLVCK](https://adamblvck.com) from the now in open-domain book "777" by Aleister Crowley. Since looking up of correspondences in the actual book can be quite tedious, and since no courated dataset of these correspondences could be found (which in itself is a treasure mine for enhancing AI-tools), I decided to create one.
+
+If you're looking for a way to look-up Gene Keys and IChing-based correspondences, I refer to [Gnomon](https://gnomon.adamblvck.com/).
+
+Since 777 includes correspondences from the Kabbalistic Scale to the 64 hexagram, and the Gene Keys include correspondences to Tarot's 22 pathways, a marriage between both systems might result one day.
 
 ## The Website
 
