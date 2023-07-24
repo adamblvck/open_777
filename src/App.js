@@ -1,6 +1,5 @@
 import React from 'react';
 
-import logo from './logo.svg';
 import './App.css';
 import "@glideapps/glide-data-grid/dist/index.css";
 
@@ -85,12 +84,12 @@ function App() {
 				
 
 				<div className="logoContainer">
-					<img src="logo_full_icon_transparent.png"></img>
+					<img src="logo_full_icon_transparent.png" alt="Three Sevens"></img>
 				</div>
 
 				<button onClick={()=>setShowSearch(true)} type="button" className="search">
 					<div className="iconContainer">
-						<svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><path fill="none" stroke="#ccc" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M338.29 338.29L448 448"/></svg>
+						<svg xmlns="http://www.w3.org/2000/svg" className="ionicon" viewBox="0 0 512 512"><path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><path fill="none" stroke="#ccc" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M338.29 338.29L448 448"/></svg>
 					</div>
 				</button>
 
@@ -117,8 +116,8 @@ function App() {
 
 							const cellColor = cell.displayData;
 							
-							if (cellColor == undefined) return;
-							if (cellColor.charAt(0) != "#") return false;
+							if (cellColor === undefined) return;
+							if (cellColor.charAt(0) !== "#") return false;
 			
 							ctx.save();
 							const { x, y, width, height } = rect;
