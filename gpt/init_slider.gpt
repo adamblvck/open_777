@@ -1,0 +1,171 @@
+I have the following code written in react:
+
+```
+import React from 'react';
+
+import './App.css';
+import "@glideapps/glide-data-grid/dist/index.css";
+
+import DataEditor from '@glideapps/glide-data-grid';
+
+// Grid columns may also provide icon, overlayIcon, menu, style, and theme overrides
+import { GridCellKind } from "@glideapps/glide-data-grid";
+
+import { TableColumns, TableIndex } from './structure';
+import { Liber777 } from './liber_777';
+import { DarkTheme } from './dark';
+
+import _ from 'lodash';
+
+function App() {
+
+	const [showSearch, setShowSearch] = React.useState(false);
+	const onSearchClose = React.useCallback(() => setShowSearch(false), []);
+
+	const [columns, setColumns] = React.useState(TableColumns);
+
+	const getContent = React.useCallback( cell => {
+		const [col, row] = cell;
+		const dataRow = Liber777[row];
+		// dumb but simple way to do this
+
+		const d = dataRow[ TableIndex[col]];
+
+		return {
+			kind: GridCellKind.Text,
+			allowOverlay: false,
+			displayData: d,
+			data: d,
+		};
+	}, []);
+
+	const getTextColor = (background_color) => {
+		// Remove the "#" symbol if present
+		if (background_color.startsWith("#")) {
+		  background_color = background_color.slice(1);
+		}
+	  
+		// Convert the background color to RGB values
+		const r = parseInt(background_color.slice(0, 2), 16);
+		const g = parseInt(background_color.slice(2, 4), 16);
+		const b = parseInt(background_color.slice(4, 6), 16);
+	  
+		// Calculate the relative luminance using the formula for sRGB
+		const relative_luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+	  
+		// Determine the appropriate text color based on the relative luminance
+		let text_color;
+		if (relative_luminance > 0.5) {
+		  text_color = "#000000";  // Black for light backgrounds
+		} else {
+		  text_color = "#FFFFFF";  // White for dark backgrounds
+		}
+	  
+		return text_color;
+	}
+
+	const handleColumnResize = (column, newSize) => {
+		setColumns(prevCols => {
+			const index = _.findIndex(prevCols, { id: column.id });
+			const newCols = [...prevCols];
+			newCols.splice(index, 1, {
+				...prevCols[index],
+				width: newSize,
+			});
+			return newCols;
+		});
+	}
+
+	return (
+		<div className="App">
+			<div className="App-header">
+				<div className="toolbar">
+					<div className="title">Open 777</div>
+					<div className="subtitle">Online Look-up & Reference Tool for Aleister Crowley's Kabbalistic Correspondences</div>
+				</div>
+				
+				
+
+				<div className="logoContainer">
+					<img src="logo_full_icon_transparent.png" alt="Three Sevens"></img>
+				</div>
+
+				<button onClick={()=>setShowSearch(true)} type="button" className="search">
+					<div className="iconContainer">
+						<svg xmlns="http://www.w3.org/2000/svg" className="ionicon" viewBox="0 0 512 512"><path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><path fill="none" stroke="#ccc" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M338.29 338.29L448 448"/></svg>
+					</div>
+				</button>
+
+				<div className="dataContainer">
+					<DataEditor
+						theme={DarkTheme}
+
+						onColumnResize={handleColumnResize}
+
+						freezeColumns={1}
+						experimental={{hyperWrapping:true}}
+
+						keybindings={{search: true}}
+						showSearch={showSearch}
+						getCellsForSelection={true}
+						onSearchClose={onSearchClose}
+						className="data"
+						getCellContent={getContent}
+						columns={columns}
+						rows={Liber777.length}
+
+						smoothScrollY={true}
+						smoothScrollX={true}
+
+						drawCell={args => {
+							const { cell, rect, ctx } = args;
+
+							const cellColor = cell.displayData;
+							
+							if (cellColor === undefined) return;
+							if (cellColor.charAt(0) !== "#") return false;
+			
+							ctx.save();
+							const { x, y, width, height } = rect;
+			
+							// Fill out cell with specified color
+							ctx.fillStyle = cellColor;
+							ctx.fillRect(x + 1, y + 1, width - 1, height - 1);
+			
+							// Enter text within cell
+							ctx.fillStyle = getTextColor(cellColor);
+							ctx.font = "bold 14px sans-serif roboto";
+							ctx.fillText(cellColor, x + width/4, y + height / 2 + 1.5);
+							ctx.restore();
+			
+							return true;
+						}}
+
+
+					/>
+				</div>
+
+				<div className="footer">Made with ❤️ by ADAM BLVCK | <a className="opensourcelink" href="https://github.com/adamblvck/open_777">Open Source</a></div>
+			</div>
+		</div>
+	);
+}
+
+export default App;
+```
+
+As you can read form the code, I'm using DataEditor from `@glideapps/glide-data-grid`.
+
+The data provided into the table consists of 32 rows, here's an example:
+
+```
+export const Liber777 = [{"index": "2 - Hebrew Names", "0": "Ain (אין) - Ain Soph (אין סוף) - Ain Soph Aur (אין סוף אור)", "1": "  (כתר) Kether", "2": "Chokmah ()", "3": "(בינה) Binah", "4": "Chesed ()", "5": "(גבורה) Geburah", "6": "Tiphareth ()", "7": "(נצח) Netzach", "8": "Hod ()", "9": "(יסוד) Yesod", "10": "Malkuth ()", "11": "(אלף) Aleph", "12": "Beth ()", "13": "(גמל) Gimel", "14": "Daleth ()", "15": " (הה) Hé", "16": "Vau ()", "17": " (זין) Zain", "18": "Cheth ()", "19": "(טית) Teth", "20": "Yod ()", "21": "(כף) Kaph", "22": "Lamed ()", "23": "(מים) Maim", "24": "Nun ()", "25": "(סמך) Samekh", "26": "Ayin ()", "27": "(פה) Pé", "28": "(צדי) Tzaddi", "29": "(קוף) Qoph", "30": "(ריש) Resh", "31": "(שין) Shin", "32": "(תו) Tau", "33": "(תו) Tau", "34": "(שין) Shin"}, {"index": "3 - English of II", "0": "Limitless LVX - No Limit - Nothing", "1": "Crown", "2": "Wisdom", "3": "Understanding", "4": "Mercy", "5": "Strength", "6": "Beauty", "7": "Victory", "8": "Splendour", "9": "Foundation", "10": "Kingdom", "11": "Ox", "12": "House", "13": "Camel", "14": "Door", "15": "Window", "16": "Nail", "17": "Sword", "18": "Fence", "19": "Serpent", "20": "Hand", "21": "Palm", "22": "Ox Goad", "23": "Water", "24": "Fish", "25": "Prop", "26": "Eye", "27": "Mouth", "28": "Fish-hook", "29": "Back of head", "30": "Head", "31": "Tooth", "32": "Tau (as Egyptian)", "33": "...", "34": "..."}, {"index": "10 - Mystic Numbers of the Sephiroth", "0": "0", "1": "1", "2": "3", "3": "6", "4": "10", "5": "15", "6": "21", "7": "28", "8": "36", "9": "45", "10": "55", "11": "66", "12": "78", "13": "91", "14": "105", "15": "120", "16": "136", "17": "153", "18": "171", "19": "190", "20": "210", "21": "231", "22": "253", "23": "276", "24": "300", "25": "325", "26": "351", "27": "378", "28": "406", "29": "435", "30": "465", "31": "496", "32": "528", "33": "...", "34": "..."}, {"index": "11 - Elements & Rulers", "0": "...", "1": "Root of 🜁", "2": "Root of 🜁", "3": "Root of 🜁", "4": "🜄", "5": "🜂", "6": "🜁", "7": "🜂", "8": "🜄", "9": "🜁", "10": "🜃", "11": "Hot & Moist 🜁", "12": "...", "13": "...", "14": "...", "15": "Sun - 🜂 - Jupiter", "16": "Venus - 🜃 - Moon", "17": "Saturn - 🜁 - Mercury", "18": "Mars - 🜁", "19": "Sun - 🜂 - Jupiter", "20": "Venus - 🜃 - Moon", "21": "...", "22": "Saturn - 🜁 - Mercury", "23": "Cold & Moist 🜄", "24": "Mars - 🜄", "25": "Sun - 🜂 - Jupiter", "26": "Venus - 🜃 - Moon", "27": "...", "28": "Saturn - 🜁 - Mercury", "29": "Mars - 🜄", "30": "...", "31": "Hot & Dry 🜂", "32": "...", "33": "Cold & Dry 🜃", "34": "..."}, {"index": "12 - Tree of Life", "0": "...", "1": "1st Plane - Middle Pillar", "2": "2nd Plane - Right Pillar", "3": "2nd Plane - Left Pillar", "4": "3rd Plane - Right Pillar", "5": "3rd Plane - Left Pillar", "6": "4th Plane - Middle Pillar", "7": "5th Plane - Right Pillar", "8": "5th Plane - Left Pillar", "9": "6th Plane - Middle Pillar", "10": "7th Plane - Middle Pillar", "11": "1 to 2", "12": "1 to 3", "13": "1 to 6", "14": "2 to 3", "15": "2 to 6", "16": "2 to 4", "17": "3 to 6", "18": "3 to 5", "19": "4 to 5", "20": "4 to 6", "21": "4 to 7", "22": "5 to 6", "23": "5 to 8", "24": "6 to 7", "25": "6 to 9", "26": "6 to 8", "27": "7 to 8", "28": "7 to 9", "29": "7 to 10", "30": "8 to 9", "31": "8 to 10", "32": "9 to 10", "33": "...", "34": "..."}, 
+```
+
+Please add a nice slider under the search bar, with four options: "The Spheres", "The Planets", "The Zodiacs", "The Paths". A selected option filters the table, only showing relevant rows, namely:
+- The Spheres: Rows 0 - 10
+- The Planets: Rows 12, 13, 14, 21, 27, 30, 32
+- The Zodiacs: Rows 15, 16, 17, 18, 19, 20, 22, 24, 25, 26, 28, 29
+- The Paths: Rows 11 - 32
+
+Add the desires changes, such that on updating the slider, the table updates the displayed rows.
