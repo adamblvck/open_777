@@ -6,13 +6,22 @@
 
 ### 🜁🜂 Visit [Open 777 Here](https://adamblvck.github.io/open_777/) 🜄🜃
 
-![](./docs/screenshot.jpg)
+![](./docs/screenshot_2025.png)
+
+## Changelog 2025 march 9
+
+- Added Card Wiew
+  - Tree of Life visualization of each pathway
+  - Perfect for mobile and desktop usage  
+  - Added ability to quickly copy all correspondences of a certain pathway. This is perfect for AI usage.
+- Vastly improved search throughout the library
+- 98% completion of Liber 777 correspondences, thanks to an anonymous contributer from [Liber Oz](https://liberoz.org/)
 
 ## About
 
-Open 777 is a small online website for easily looking up Crowley's Esoteric Kabbalistic correspondences, meant for Esoteric Study & Practice.
+Open 777 is a small online website for easily looking up Crowley's Esoteric Kabbalistic / Qabalistic correspondences, meant for Esoteric Study & Practice.
 
-The website consists of transcriptions done by [ADAM BLVCK](https://adamblvck.com) from the now in open-domain book "777" by Aleister Crowley. Since looking up of correspondences in the actual book can be quite tedious, and since no courated dataset of these correspondences could be found (which in itself is a treasure mine for enhancing AI-tools), I decided to create one.
+The website consists of transcriptions done by [ADAM BLVCK](https://adamblvck.com) from the now in open-domain book "777" by Aleister Crowley (with the help of Occultish Angel, and also an anonymous Frater from [Liber Oz](https://liberoz.org/)). Since looking up of correspondences in the actual book can be quite tedious, and since no courated dataset of these correspondences could be found (which in itself is a treasure mine for enhancing AI-tools), it's been decided to create one.
 
 If you're looking for a way to look-up Gene Keys and IChing-based correspondences, I refer to [Gnomon](https://gnomon.adamblvck.com/).
 
@@ -24,11 +33,17 @@ In the books, the tables of correspondences is organized in 32 rows which repres
 
 The website uses [Glide Data Grid](https://github.com/glideapps/glide-data-grid) which is most suitable for this purpose, and includes search-functionality across the whole table.
 
+**Update 2025: a new card-view update has been added, for better immersion and searching through the library. It's also mobile friendly now!**
+
 ## The Data
 
 The to-transcribe data is huge, and thus this website will be updated every few days until all correspondences are covered. If you think you can help with transcription, please message me here or at contact@adamblvck.com.
 
 The correspondence dataset can be found as a json object in the file `src/liber_777.js`, or `docs/liber_777.csv`, but the source of both these files is now hosted on [Google Sheets](https://docs.google.com/spreadsheets/d/1bJPN_gs6USHniUfmWFIACCroOAzOq8jX2XWITclSBA0/edit?usp=sharing). The python notebook located at `docs/convert_json.ipynb` can be used to convert a csv (exported from the Google Sheet) into an appropriate format for use in a website, or javascript environment.
+
+A recent contribution by an anonymous frater completed almost all columns from Liber 777.
+
+**Please note, that this app capture's Aleister Crowley's Correspondences, not all other correspondences from the many esotericists out there. The idea to capture many magicinan's correspondences in a beautiful correspondence platform is a truly blessed idea.**
 
 ### 🜁🜂 Visit [Open 777 Here](https://adamblvck.github.io/open_777/) 🜄🜃
 

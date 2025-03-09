@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useCallback, useMemo } from 'react';
 
 import './App.css';
 import "@glideapps/glide-data-grid/dist/index.css";
@@ -13,6 +13,15 @@ import { Liber777 } from './liber_777';
 import { DarkTheme } from './dark';
 
 import _ from 'lodash';
+import logo from './logo_full_icon_transparent.png';
+import debounce from 'lodash/debounce';
+
+import { Modal } from './components/modals/Modal';
+import { InfoModal } from './components/modals/InfoModal';
+import TreeOfLife from './components/TreeOfLife';
+
+import { CardView } from './components/cards/CardView';
+import SearchBar from './components/search/SearchBar';
 
 function App() {
 
@@ -39,21 +48,24 @@ function App() {
 		setColumns(filteredColumns);
 	}, [selectedFilter]);
 
-	const getContent = React.useCallback( cell => {
+	const getContent = React.useCallback(cell => {
 		const [col, row] = cell;
 		const dataRow = Liber777[row];
-	
+
 		// retrieve correct index, based on selected filter range
-		const filterSpecificColumn = filterRanges[selectedFilter][col]
-		const d = dataRow[ TableIndex[filterSpecificColumn]];
+		const filterSpecificColumn = filterRanges[selectedFilter][col];
+		const d = dataRow[TableIndex[filterSpecificColumn]];
+
+		// Ensure we return a string value
+		const displayValue = d === undefined || d === null ? '' : String(d);
 
 		return {
 			kind: GridCellKind.Text,
 			allowOverlay: false,
-			displayData: d,
-			data: d,
+			displayData: displayValue,
+			data: displayValue,
 		};
-	}, [columns]);
+	}, [selectedFilter]);
 
 	const Slider = ({ options, onChange }) => (
         <div className="selector">
@@ -106,80 +118,271 @@ function App() {
 		});
 	}
 
+	const [viewMode, setViewMode] = useState('cards');
+
+	// Update view mode on window resize
+	// useEffect(() => {
+	// 	const handleResize = () => {
+	// 		setViewMode(window.innerWidth <= 1024 ? 'cards' : 'table');
+	// 	};
+	// 	window.addEventListener('resize', handleResize);
+	// 	return () => window.removeEventListener('resize', handleResize);
+	// }, []);
+
+	const [selectedCard, setSelectedCard] = useState(null);
+
+	// Add this state near your other useState declarations
+	const [cardSize, setCardSize] = useState('large'); // 'small', 'medium', 'large'
+
+	// Add these new states
+	const [searchTerm, setSearchTerm] = useState('');
+	const [debouncedTerm, setDebouncedTerm] = useState('');
+	const [matchedFields, setMatchedFields] = useState(new Map());
+	const [filteredResults, setFilteredResults] = useState(null);
+
+	// Create debounced search function
+	const debouncedSearch = useMemo(
+		() => debounce((term) => {
+			if (!term) {
+				setDebouncedTerm('');
+				setMatchedFields(new Map());
+				setFilteredResults(null);
+				return;
+			}
+
+			// Batch our state updates
+			const results = new Map();
+			const searchTermLower = term.toLowerCase().trim();
+
+			requestAnimationFrame(() => {
+				Liber777.forEach((row, rowIdx) => {
+					for (let colIdx = 0; colIdx <= 34; colIdx++) {
+						const value = row[colIdx];
+						if (value && 
+							typeof value === 'string' &&
+							value.trim() !== '' &&
+							value !== '...' && 
+							String(value).toLowerCase().includes(searchTermLower)) {
+							const key = `${rowIdx}-${colIdx}`;
+							results.set(key, true);
+						}
+					}
+				});
+
+				// Batch these state updates together
+				Promise.resolve().then(() => {
+					setDebouncedTerm(term);
+					setMatchedFields(results);
+				});
+			});
+		}, 750), // Increased debounce delay to 750ms
+		[]
+	);
+
+	// Cleanup debounce on unmount
+	useEffect(() => {
+		return () => {
+			debouncedSearch.cancel();
+		};
+	}, [debouncedSearch]);
+
+	// Handle search input changes
+	const handleSearchChange = useCallback((e) => {
+		const value = e.target.value;
+		setSearchTerm(value);
+		debouncedSearch(value);
+	}, [debouncedSearch]);
+
+	// Define SizeSelector before it's used
+	const SizeSelector = () => (
+        <div className="flex items-center gap-1 bg-gray-800/50 p-1 rounded-lg">
+            {[
+                { size: 'small', icon: '□' },
+                { size: 'medium', icon: '▢' },
+                { size: 'large', icon: '■' }
+            ].map(({ size, icon }) => (
+                <button
+                    key={size}
+                    onClick={() => setCardSize(size)}
+                    className={`w-8 h-8 flex items-center justify-center rounded-md transition-colors ${
+                        cardSize === size 
+                        ? 'bg-purple-600 text-white' 
+                        : 'text-gray-400 hover:bg-gray-700/50'
+                    }`}
+                >
+                    {icon}
+                </button>
+            ))}
+        </div>
+    );
+
+	// ViewToggle component that uses SizeSelector
+	const ViewToggle = () => (
+		<div className="flex items-center gap-4 p-2">
+			<div className="flex items-center gap-2">
+				<button
+					onClick={() => setViewMode('table')}
+					className={`text-sm px-4 py-2 rounded-l-lg ${
+						viewMode === 'table' 
+						? 'bg-purple-600 text-white' 
+						: 'bg-gray-200 text-gray-700'
+					}`}
+				>
+					Table
+				</button>
+				<button
+					onClick={() => setViewMode('cards')}
+					className={`text-sm px-4 py-2 rounded-r-lg ${
+						viewMode === 'cards' 
+						? 'bg-purple-600 text-white' 
+						: 'bg-gray-200 text-gray-700'
+					}`}
+				>
+					Cards
+				</button>
+			</div>
+			{viewMode === 'cards' && <SizeSelector />}
+		</div>
+	);
+
+	// Add this useEffect near your other hooks at the top of the App component
+	React.useEffect(() => {
+		if (selectedCard) {
+			document.body.style.overflow = 'hidden';
+		} else {
+			document.body.style.overflow = 'unset';
+		}
+
+		// Cleanup function to ensure we restore scrolling when component unmounts
+		return () => {
+			document.body.style.overflow = 'unset';
+		};
+	}, [selectedCard]);
+
+	const [showInfo, setShowInfo] = React.useState(false);
+
 	return (
 		<div className="App">
 			<div className="App-header">
 				<div className="toolbar">
-					<div className="title">Open 777</div>
-					<div className="subtitle">Online Look-up & Reference Tool for Aleister Crowley's Kabbalistic Correspondences</div>
-				</div>
-				
-				<div className="logoContainer">
-					<img src="logo_full_icon_transparent.png" alt="Three Sevens"></img>
+					<div className="flex items-center justify-center gap-3">
+						<img src={logo} alt="Three Sevens" className="h-20 mt-2" />
+						<div className="title">Open 777</div>
+						<button
+							onClick={() => setShowInfo(true)}
+							className="ml-2 w-10 h-10 text-xl text-black flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-700 text-gray-400 text-sm font-semibold transition-colors"
+						>
+							i
+						</button>
+					</div>
+					<div className="flex items-center justify-center gap-2">
+						<div className="subtitle">Online Look-up & Reference Tool for Aleister Crowley's Kabbalistic Correspondences</div>
+					</div>
 				</div>
 
-				<button onClick={()=>setShowSearch(true)} type="button" className="search">
+				{viewMode === 'table' ? <button onClick={()=>setShowSearch(true)} type="button" className="search">
 					<div className="iconContainer">
 						<svg xmlns="http://www.w3.org/2000/svg" className="ionicon" viewBox="0 0 512 512"><path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="currentColor" strokeMiterlimit="10" strokeWidth="32"/><path fill="none" stroke="#ccc" strokeLinecap="round" strokeMiterlimit="10" strokeWidth="32" d="M338.29 338.29L448 448"/></svg>
 					</div>
-				</button>
+				</button>: undefined }
 
+				<ViewToggle />
+				<div className="h-4"/>
+				<SearchBar 
+					viewMode={viewMode}
+					search={{
+						term: searchTerm,
+						setTerm: setSearchTerm,
+						debouncedSearch,
+						handleChange: handleSearchChange,
+						clearSearch: () => {
+							setSearchTerm('');
+							debouncedSearch.cancel();
+							setDebouncedTerm?.('');
+							setMatchedFields?.(new Map());
+							setFilteredResults?.(null);
+						}
+					}}
+				/>
 				<Slider
                     options={["All", "The Spheres", "The Planets", "The Zodiacs", "The Elements", "The Paths"]}
                     onChange={setSelectedFilter}
                 />
 
-				<div className="dataContainer">
-					<DataEditor
-						theme={DarkTheme}
+				{/* Here add search bar */}
 
-						onColumnResize={handleColumnResize}
+				{viewMode === 'table' ? (
+					<div className="dataContainer">
+						<DataEditor
+							theme={DarkTheme}
 
-						freezeColumns={1}
-						experimental={{hyperWrapping:true}}
+							onColumnResize={handleColumnResize}
 
-						keybindings={{search: true}}
-						showSearch={showSearch}
-						getCellsForSelection={true}
-						onSearchClose={onSearchClose}
-						className="data"
-						getCellContent={getContent}
+							freezeColumns={1}
+							experimental={{hyperWrapping:true}}
 
-						columns={columns}
-						rows={Liber777.length}
+							keybindings={{search: true}}
+							showSearch={showSearch}
+							getCellsForSelection={true}
+							onSearchClose={onSearchClose}
+							className="data"
+							getCellContent={getContent}
 
-						smoothScrollY={true}
-						smoothScrollX={true}
+							columns={columns}
+							rows={Liber777.length}
 
-						drawCell={args => {
-							const { cell, rect, ctx } = args;
+							smoothScrollY={true}
+							smoothScrollX={true}
 
-							const cellColor = cell.displayData;
-							
-							if (cellColor === undefined) return;
-							if (cellColor.charAt(0) !== "#") return false;
-			
-							ctx.save();
-							const { x, y, width, height } = rect;
-			
-							// Fill out cell with specified color
-							ctx.fillStyle = cellColor;
-							ctx.fillRect(x + 1, y + 1, width - 1, height - 1);
-			
-							// Enter text within cell
-							ctx.fillStyle = getTextColor(cellColor);
-							ctx.font = "bold 14px sans-serif roboto";
-							ctx.fillText(cellColor, x + width/4, y + height / 2 + 1.5);
-							ctx.restore();
-			
-							return true;
-						}}
+							drawCell={args => {
+								const { cell, rect, ctx } = args;
+
+								const cellColor = cell.displayData;
+								
+								if (cellColor === undefined) return;
+								if (typeof cellColor !== 'string' || cellColor.charAt(0) !== "#") return false;
+								if (cellColor.charAt(0) !== "#") return false;
+				
+								ctx.save();
+								const { x, y, width, height } = rect;
+				
+								// Fill out cell with specified color
+								ctx.fillStyle = cellColor;
+								ctx.fillRect(x + 1, y + 1, width - 1, height - 1);
+				
+								// Enter text within cell
+								ctx.fillStyle = getTextColor(cellColor);
+								ctx.font = "bold 14px sans-serif roboto";
+								ctx.fillText(cellColor, x + width/4, y + height / 2 + 1.5);
+								ctx.restore();
+				
+								return true;
+							}}
 
 
+						/>
+					</div>
+				) : (
+					<CardView 
+						cardSize={cardSize}
+						selectedFilter={selectedFilter}
+						filterRanges={filterRanges}
+						debouncedTerm={debouncedTerm}
+						matchedFields={matchedFields}
+						setSelectedCard={setSelectedCard}
 					/>
-				</div>
+				)}
 
-				<div className="footer">Made with ❤️ by ADAM BLVCK | <a className="opensourcelink" href="https://github.com/adamblvck/open_777">Open Source</a></div>
+				
+
+				<Modal 
+					card={selectedCard} 
+					onClose={() => setSelectedCard(null)} 
+				/>
+
+				<InfoModal isOpen={showInfo} onClose={() => setShowInfo(false)} />
+
+				<div className="footer">Made with ❤️ by ADAM BLVCK | <a className="opensourcelink" href="https://github.com/adamblvck/open_777">This Project Is Open Source</a></div>
 			</div>
 		</div>
 	);
