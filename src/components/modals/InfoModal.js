@@ -44,8 +44,27 @@ export const InfoModal = ({ isOpen, onClose }) => {
 						<br/>• On Chrome/Desktop: Click the install icon (⊕) in the address bar
 						<br/>• On iOS: Tap the share button and select "Add to Home Screen"
 						<br/>• On Android: Tap the three dots menu and select "Install app" or "Add to Home Screen"
+						<br/>
 						Enjoy an offline experience!
 					</p>
+
+					{/* Feedback Button Section */}
+					<div className="border-t border-primary-700/20 pt-4 flex justify-center">
+						<a 
+							href="https://form.typeform.com/to/rFMYS1Jl"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="group relative inline-flex items-center justify-center px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors duration-300 shadow-lg hover:shadow-xl"
+						>
+							<span className="mr-2">
+								<svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+								</svg>
+							</span>
+							Share Your Feedback
+						</a>
+					</div>
+
 					<div className="footer border-t border-primary-700/20 pt-3 sm:pt-4 text-xs sm:text-sm">
 						Made with ❤️ by ADAM BLVCK | <a className="opensourcelink hover:text-primary-400 transition-colors" href="https://github.com/adamblvck/open_777">This App and its data is open source</a>
 					</div>
