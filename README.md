@@ -1,7 +1,7 @@
 # Open 777
 
 <p align="center">
-  <img width="120" height="120" src="./docs/docs_logo.png">
+  <img width="auto" height="120" src="./docs/docs_logo.png">
 </p>
 
 ### 🜁🜂 Visit [Open 777 Here](https://adamblvck.github.io/open_777/) 🜄🜃
