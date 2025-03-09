@@ -72,7 +72,7 @@ export const Card = ({
 				data: Liber777.map(row => row[columnIndex]),
 				searchTerm: debouncedTerm
 			})}
-			className={`bg-gray-900 rounded-lg shadow-lg cursor-pointer 
+			className={`bg-gray-900 shadow-lg cursor-pointer 
 					 hover:bg-gray-800 transition-colors rounded-3xl border border-primary-700/20
 					 hover:border-primary-700/40 ${style.container}`}
 		>
@@ -93,7 +93,7 @@ export const Card = ({
 						// Show matched fields when searching
 						matchedValues.map(({value, rowIdx}) => (
 							<p key={rowIdx} 
-							   className="text-gray-300 text-sm bg-primary-500/20 rounded px-1">
+							   className="text-gray-300 text-sm bg-primary-500/20 rounded-3xl px-1">
 								<span className="text-xs text-primary-400">
 									{Liber777[rowIdx].index}:
 								</span>
