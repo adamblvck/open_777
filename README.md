@@ -8,12 +8,12 @@
 
 ![](./docs/screenshot_2025.png)
 
-## Changelog 2025 march 9
+## Changelog 2025 March 9th
 
-- Added Card Wiew
+- Added Card View
   - Tree of Life visualization of each pathway
   - Perfect for mobile and desktop usage  
-  - Added ability to quickly copy all correspondences of a certain pathway. This is perfect for AI usage.
+  - Added ability to quickly copy all correspondences of a certain pathway. This is perfect for Generative AI usage.
 - Vastly improved search throughout the library
 - 98% completion of Liber 777 correspondences, thanks to an anonymous contributer from [Liber Oz](https://liberoz.org/)
 
