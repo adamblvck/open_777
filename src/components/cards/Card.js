@@ -1,6 +1,6 @@
 import React from 'react';
 import TreeOfLife from '../TreeOfLife';
-import { Liber777 } from '../../liber_777';
+import { Liber777 } from '../../constants/liber_777';
 
 export const Card = ({
     column,

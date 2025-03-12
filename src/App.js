@@ -9,7 +9,7 @@ import DataEditor from '@glideapps/glide-data-grid';
 import { GridCellKind } from "@glideapps/glide-data-grid";
 
 import { TableColumns, TableIndex } from './structure';
-import { Liber777 } from './liber_777';
+import { Liber777 } from './constants/liber_777';
 import { DarkTheme } from './dark';
 
 import _ from 'lodash';
@@ -382,7 +382,7 @@ function App() {
 
 				<InfoModal isOpen={showInfo} onClose={() => setShowInfo(false)} />
 
-				<div className="footer">Made with ❤️ by ADAM BLVCK | <a className="opensourcelink" href="https://github.com/adamblvck/open_777">This Project Is Open Source</a></div>
+				<div className="footer">Made with ❤️ by ADAM BLVCK | <a className="opensourcelink" href="https://github.com/adamblvck/open_777">This Project is Open Source</a></div>
 			</div>
 		</div>
 	);

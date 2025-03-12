@@ -1,6 +1,7 @@
 import React from 'react';
 import TreeOfLife from '../TreeOfLife';
-import { Liber777 } from '../../liber_777.js';
+import { Liber777 } from '../../constants/liber_777';
+import { pathsData } from '../../constants/paths';
 import { getTextColor } from '../../helpers/helpers';
 
 export const Modal = ({ card, onClose }) => {
@@ -27,6 +28,12 @@ export const Modal = ({ card, onClose }) => {
         navigator.clipboard.writeText(formattedData);
     };
 
+
+	const cardNumber = parseInt(card.title) + 1;
+	const cardName = pathsData[`${cardNumber}`]?.name;
+	const cardTitle = pathsData[`${cardNumber}`]?.title;
+	const cardDescription = pathsData[`${cardNumber}`]?.description;
+
     return (
 		<div 
 			className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 md:p-6"
@@ -36,7 +43,7 @@ export const Modal = ({ card, onClose }) => {
 				{/* Header */}
 				<div className="sticky top-0 bg-gray-900/95 backdrop-blur-sm p-6 border-b border-primary-700/20 flex justify-between items-center z-10">
 					<div className="flex-1 text-center flex items-center justify-center gap-4">
-						<h2 className="text-3xl font-bold text-primary-300">Pathway {card.title}</h2>
+						<h2 className="text-3xl font-bold text-primary-300">{cardTitle}</h2>
 						<div className="flex items-center gap-2">
 							<button
 								onClick={copyAllData}
@@ -73,7 +80,7 @@ export const Modal = ({ card, onClose }) => {
 				<div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] h-[calc(90vh-5rem)]">
 					{/* Sticky Tree of Life Section */}
 					<div className="hidden lg:block bg-gray-800/30 border-r border-primary-700/20">
-						<div className="sticky top-0 p-6">
+						<div className="sticky top-0 p-6 max-h-[calc(90vh-5rem)] overflow-y-auto">
 							<div className="bg-gray-800/50 rounded-lg p-4 border border-primary-700/10">
 								<h3 className="text-secondary-400 font-medium mb-4 text-sm uppercase tracking-wider">
 									Path on the Tree
@@ -85,6 +92,18 @@ export const Modal = ({ card, onClose }) => {
 										selected={[parseInt(card.title) + 1]}
 										pathwayColor={card.data[19] || "#FFFFFF"}
 									/>
+								</div>
+
+								{/* Path Information */}
+								<div className="mt-6 space-y-4">
+									<h3 className="text-2xl font-semibold text-primary-300 text-left">
+										{cardName}
+									</h3>
+									<div className="text-gray-300 leading-relaxed text-base text-left space-y-4">
+										{cardDescription?.split('\n\n').map((paragraph, index) => (
+											<p key={index}>{paragraph}</p>
+										))}
+									</div>
 								</div>
 							</div>
 						</div>
@@ -105,6 +124,18 @@ export const Modal = ({ card, onClose }) => {
 										selected={[parseInt(card.title) + 1]}
 										pathwayColor={card.data[19] || "#FFFFFF"}
 									/>
+								</div>
+
+								{/* Path Information */}
+								<div className="mt-6 space-y-4">
+									<h3 className="text-2xl font-semibold text-primary-300 text-left">
+										{cardName}
+									</h3>
+									<div className="text-gray-300 leading-relaxed text-base text-left space-y-4">
+										{cardDescription?.split('\n\n').map((paragraph, index) => (
+											<p key={index}>{paragraph}</p>
+										))}
+									</div>
 								</div>
 							</div>
 						</div>

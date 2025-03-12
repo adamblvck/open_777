@@ -26,7 +26,7 @@ export const InfoModal = ({ isOpen, onClose }) => {
 						</svg>
 					</button>
 				</div>
-				<div className="space-y-2 sm:space-y-3 md:space-y-4 text-gray-300 text-xs sm:text-sm md:text-base">
+				<div className="space-y-2 sm:space-y-3 md:space-y-4 text-gray-300 text-xs sm:text-sm md:text-base text-left">
 					<p className="leading-relaxed">
 						Open 777 is a modern digital reference tool designed to make Aleister Crowley's system of correspondences more accessible and interactive. It serves as a bridge between traditional occult knowledge and contemporary technological convenience, allowing practitioners, researchers, and students to quickly navigate through complex magical and Kabbalistic associations.
 					</p>
@@ -37,7 +37,9 @@ export const InfoModal = ({ isOpen, onClose }) => {
 						This application allows you to explore these correspondences through both a traditional table view and an innovative card-based interface. You can filter the information by categories such as Spheres, Planets, Zodiacs, Elements, and Paths, making it easier to focus on specific aspects of the system. Each entry is carefully preserved from the original source while being presented in a format that's more accessible to modern practitioners.
 					</p>
 					<p className="leading-relaxed border-t border-primary-700/20 pt-3 sm:pt-4 text-xs sm:text-sm">
-						Transcription credits (Liber 777): Adam Blvck, Occultish Angel, Liber OZ
+						Transcription credits (Liber 777): <a href="https://adamblvck.com" target="_blank" className="text-primary-400 hover:text-primary-300 transition-colors">Adam Blvck</a>, Occultish Angel, Liber OZ
+						<br/>
+						Pathway paragraphs have been scraped from <a href="https://namu.wiki/w/%EB%A6%AC%EB%B2%A8%20777" target="_blank" rel="noopener noreferrer" className="text-primary-400 hover:text-primary-300 transition-colors">Namu Wiki</a>
 					</p>
 					<p className="leading-relaxed border-t border-primary-700/20 pt-3 sm:pt-4 text-xs sm:text-sm">
 						Open 777 is also available as a Progressive Web App (PWA), meaning you can install it on your device and use it offline. To install:
@@ -61,12 +63,12 @@ export const InfoModal = ({ isOpen, onClose }) => {
 									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
 								</svg>
 							</span>
-							Share Your Feedback
+							Got ideas or did I miss something? Share Your Feedback!
 						</a>
 					</div>
 
 					<div className="footer border-t border-primary-700/20 pt-3 sm:pt-4 text-xs sm:text-sm">
-						Made with ❤️ by ADAM BLVCK | <a className="opensourcelink hover:text-primary-400 transition-colors" href="https://github.com/adamblvck/open_777">This App and its data is open source</a>
+						Made with ❤️ by ADAM BLVCK | <a className="opensourcelink hover:text-primary-400 transition-colors" href="https://github.com/adamblvck/open_777">This App and its data are open source</a>
 					</div>
 				</div>
 			</div>

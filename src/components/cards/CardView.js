@@ -1,9 +1,7 @@
 import React from 'react';
 import { Card } from './Card';
-import { Liber777 } from '../../liber_777';
+import { Liber777 } from '../../constants/liber_777';
 import { TableColumns } from '../../structure';
-
-
 
 export const CardView = ({ 
     cardSize, 

@@ -1,6 +1,8 @@
-const CACHE_NAME = 'your-app-v1';
+// Update this version number whenever you want to trigger an update
+const CACHE_NAME = 'open777-v1.0.0';
+const VERSION = 1;
 
-// Get the repository name from the location
+// Get the scope from the location
 const getScope = () => {
   const path = self.location.pathname;
   const parts = path.split('/');
@@ -24,15 +26,34 @@ self.addEventListener('install', event => {
     caches.open(CACHE_NAME)
       .then(cache => cache.addAll(urlsToCache))
   );
+  // Force the waiting service worker to become the active service worker
+  self.skipWaiting();
 });
 
-// Fetch resources
+// Clean up old caches when a new service worker activates
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.map(cacheName => {
+          if (cacheName !== CACHE_NAME) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    }).then(() => {
+      // Take control of all clients as soon as it activates
+      return clients.claim();
+    })
+  );
+});
+
+// Fetch resources with network-first strategy
 self.addEventListener('fetch', event => {
   event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        // Return cached version or fetch from network
-        return response || fetch(event.request);
+    fetch(event.request)
+      .catch(() => {
+        return caches.match(event.request);
       })
   );
 }); 
