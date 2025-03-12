@@ -1,7 +1,7 @@
 import React from 'react';
 import TreeOfLife from '../TreeOfLife';
 import { Liber777 } from '../../constants/liber_777';
-
+import { pathsData } from '../../constants/paths';
 export const Card = ({
     column,
     colIndex,
@@ -63,6 +63,14 @@ export const Card = ({
 
     const style = cardStyles[cardSize];
 
+	const hasBis = /bis/i.test(column.title);
+	const cardNumber = parseInt(column.title.replace(/\s*bis\s*/i, '')) + (hasBis ? 0 : 1);
+	const cardName = pathsData[`${cardNumber}`]?.name;
+	const cardTitle = pathsData[`${cardNumber}`]?.title;
+	const cardDescription = pathsData[`${cardNumber}`]?.description;
+
+	console.log(cardNumber, column.title, ",,,,");
+
     return (
 		<div 
 			key={column.id}
@@ -77,7 +85,7 @@ export const Card = ({
 					 hover:border-primary-700/40 ${style.container}`}
 		>
 			<h3 className={style.title}>
-				{title}
+				{cardTitle}
 			</h3>
 			<div className={style.treeContainer || 'flex justify-center items-center'}>
 				<TreeOfLife 

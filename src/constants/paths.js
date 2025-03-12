@@ -6,12 +6,12 @@ export const pathsData = {
   },
   "2": {
     "title": "Sephira 2",
-    "name": "Hokma",
+    "name": "Hokmah",
     "description": "The second path is the path of the enlightened intellect, the crown of creation, the light of its equal unity, exalted above all like the head, which the Kabbalists call the Second Glory."
   },
   "3": {
     "title": "Sephira 3",
-    "name": "Bina",
+    "name": "Binah",
     "description": "The third way is the sanctifying intelligence, the foundation of primordial wisdom, which is called the giver of faith and its root. amen. It is the parent of faith, from which faith comes."
   },
   "4": {
@@ -21,7 +21,7 @@ export const pathsData = {
   },
   "5": {
     "title": "Sephira 5",
-    "name": "Gebura",
+    "name": "Geburah",
     "description": "The Fifth Path is called the Radical Intelligence, which itself is the Equal Essence of the Oneness, and considers itself Wisdom, or Binah, or Intelligence, radiating from the primordial depths of Hochmah. do combine"
   },
   "6": {
@@ -36,7 +36,7 @@ export const pathsData = {
   },
   "8": {
     "title": "Sephira 8",
-    "name": "Horde",
+    "name": "Hod",
     "description": "The Eighth Path is called the Absolute Path, or the Perfect Path, because it is the means of the First. The first has no root to cling to or depend on but the Gedulah from its own nature, the hidden places of its majesty."
   },
   "9": {
