@@ -23,6 +23,9 @@ import TreeOfLife from './components/TreeOfLife';
 import { CardView } from './components/cards/CardView';
 import SearchBar from './components/search/SearchBar';
 
+import { BookReader } from './components/BookReader';
+import { LiberO } from './constants/libero';
+
 function App() {
 
 	const [showSearch, setShowSearch] = React.useState(false);
@@ -132,7 +135,7 @@ function App() {
 	const [selectedCard, setSelectedCard] = useState(null);
 
 	// Add this state near your other useState declarations
-	const [cardSize, setCardSize] = useState('large'); // 'small', 'medium', 'large'
+	const [cardSize, setCardSize] = useState('medium'); // 'small', 'medium', 'large'
 
 	// Add these new states
 	const [searchTerm, setSearchTerm] = useState('');
@@ -232,13 +235,23 @@ function App() {
 				</button>
 				<button
 					onClick={() => setViewMode('cards')}
-					className={`text-sm px-4 py-2 rounded-r-lg ${
+					className={`text-sm px-4 py-2 ${
 						viewMode === 'cards' 
 						? 'bg-purple-600 text-white' 
 						: 'bg-gray-200 text-gray-700'
 					}`}
 				>
 					Cards
+				</button>
+				<button
+					onClick={() => setViewMode('liber-o')}
+					className={`text-sm px-4 py-2 rounded-r-lg ${
+						viewMode === 'liber-o' 
+						? 'bg-purple-600 text-white' 
+						: 'bg-gray-200 text-gray-700'
+					}`}
+				>
+					Liber O
 				</button>
 			</div>
 			{viewMode === 'cards' && <SizeSelector />}
@@ -280,37 +293,45 @@ function App() {
 					</div>
 				</div>
 
-				{viewMode === 'table' ? <button onClick={()=>setShowSearch(true)} type="button" className="search">
-					<div className="iconContainer">
-						<svg xmlns="http://www.w3.org/2000/svg" className="ionicon" viewBox="0 0 512 512"><path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="currentColor" strokeMiterlimit="10" strokeWidth="32"/><path fill="none" stroke="#ccc" strokeLinecap="round" strokeMiterlimit="10" strokeWidth="32" d="M338.29 338.29L448 448"/></svg>
-					</div>
-				</button>: undefined }
+				{/* Only show search button for table view */}
+				{viewMode === 'table' && (
+					<button onClick={()=>setShowSearch(true)} type="button" className="search">
+						<div className="iconContainer">
+							<svg xmlns="http://www.w3.org/2000/svg" className="ionicon" viewBox="0 0 512 512"><path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="currentColor" strokeMiterlimit="10" strokeWidth="32"/><path fill="none" stroke="#ccc" strokeLinecap="round" strokeMiterlimit="10" strokeWidth="32" d="M338.29 338.29L448 448"/></svg>
+						</div>
+					</button>
+				)}
 
 				<ViewToggle />
 				<div className="h-4"/>
-				<SearchBar 
-					viewMode={viewMode}
-					search={{
-						term: searchTerm,
-						setTerm: setSearchTerm,
-						debouncedSearch,
-						handleChange: handleSearchChange,
-						clearSearch: () => {
-							setSearchTerm('');
-							debouncedSearch.cancel();
-							setDebouncedTerm?.('');
-							setMatchedFields?.(new Map());
-							setFilteredResults?.(null);
-						}
-					}}
-				/>
-				<Slider
-                    options={["All", "The Spheres", "The Planets", "The Zodiacs", "The Elements", "The Paths"]}
-                    onChange={setSelectedFilter}
-                />
 
-				{/* Here add search bar */}
+				{/* Only show SearchBar and Slider for table/cards view */}
+				{viewMode !== 'liber-o' && (
+					<>
+						<SearchBar 
+							viewMode={viewMode}
+							search={{
+								term: searchTerm,
+								setTerm: setSearchTerm,
+								debouncedSearch,
+								handleChange: handleSearchChange,
+								clearSearch: () => {
+									setSearchTerm('');
+									debouncedSearch.cancel();
+									setDebouncedTerm?.('');
+									setMatchedFields?.(new Map());
+									setFilteredResults?.(null);
+								}
+							}}
+						/>
+						<Slider
+							options={["All", "The Spheres", "The Planets", "The Zodiacs", "The Elements", "The Paths"]}
+							onChange={setSelectedFilter}
+						/>
+					</>
+				)}
 
+				{/* Main content rendering */}
 				{viewMode === 'table' ? (
 					<div className="dataContainer">
 						<DataEditor
@@ -362,7 +383,7 @@ function App() {
 
 						/>
 					</div>
-				) : (
+				) : viewMode === 'cards' ? (
 					<CardView 
 						cardSize={cardSize}
 						selectedFilter={selectedFilter}
@@ -371,6 +392,8 @@ function App() {
 						matchedFields={matchedFields}
 						setSelectedCard={setSelectedCard}
 					/>
+				) : (
+					<BookReader book={LiberO} />
 				)}
 
 				

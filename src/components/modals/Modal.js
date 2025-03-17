@@ -5,6 +5,8 @@ import { pathsData } from '../../constants/paths';
 import { getTextColor } from '../../helpers/helpers';
 
 export const Modal = ({ card, onClose }) => {
+    const [showLiberO, setShowLiberO] = React.useState(false);
+
     if (!card) return null;
 
     const handleBackdropClick = (e) => {
@@ -16,6 +18,8 @@ export const Modal = ({ card, onClose }) => {
     const copyAllData = () => {
         if (!card) return;
         
+        const sphereInfo = cardDescription ? `${cardName}\n${cardDescription}` : '';
+        
         const formattedData = card.data
             .map((value, idx) => {
                 if (!value || value === '...') return null;
@@ -25,9 +29,16 @@ export const Modal = ({ card, onClose }) => {
             .filter(Boolean)
             .join('\n');
             
-        navigator.clipboard.writeText(formattedData);
+        navigator.clipboard.writeText(sphereInfo + '\n\n' + formattedData);
     };
 
+    const liberOIndices = [
+        'II', 'III', 'V', 'VI', 'VII', 'IX', 'XI', 'XII', 'XIV', 'XV', 'XVI', 'XVII', 'XVIII', 'XIX',
+        'XXXIV', 'XXXV', 'XXXVIII', 'XXXIX', 'XL', 'XLI', 'XLII', 'XLV', 'LIV', 'LV', 'LIX', 'LX', 'LXI',
+        'LXIII', 'LXX', 'LXXV', 'LXXVII', 'LXVIII', 'LXXIX', 'LXXX', 'LXXXI', 'LXXXIII', 'XCVII', 'XCVIII',
+        'XCIX', 'C', 'CI', 'CXVII', 'CXVIII', 'CXXXVII', 'CXXXVIII', 'CXXXIX', 'CLXXV', 'CLXXVI', 'CLXXVII',
+        'CLXXXII'
+    ];
 
 	const cardNumber = parseInt(card.title) + 1;
 	const cardName = pathsData[`${cardNumber}`]?.name;
@@ -62,6 +73,24 @@ export const Modal = ({ card, onClose }) => {
 								</button>
 								<div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-48 p-2 bg-gray-800 rounded-md text-xs text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
 									With the copy all button you'll be able to copy all the information in this popup, perfect for LLM usage.
+								</div>
+							</div>
+							<button
+								onClick={() => setShowLiberO(!showLiberO)}
+								className={`flex items-center gap-1 px-3 py-1.5 text-sm rounded-md ${
+									showLiberO ? 'bg-primary-600 text-white' : 'bg-gray-800 hover:bg-gray-700 text-gray-300'
+								} transition-colors`}
+							>
+								Liber O
+							</button>
+							<div className="relative group">
+								<button
+									className="w-6 h-6 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gray-700 text-gray-400 text-sm font-semibold transition-colors"
+								>
+									i
+								</button>
+								<div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-48 p-2 bg-gray-800 rounded-md text-xs text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+									Toggling this will only show correspondences that are to be "committed to memory", as mentioned in Liber O, Chapter II.1
 								</div>
 							</div>
 						</div>
@@ -144,7 +173,11 @@ export const Modal = ({ card, onClose }) => {
 							{card.data.map((value, idx) => {
 								if (!value || value === '...') return null;
 								
-								// Safely check if the value includes the search term
+								if (showLiberO) {
+									const currentIndex = Liber777[idx]?.index?.split('.')?.[0];
+									if (!liberOIndices.includes(currentIndex)) return null;
+								}
+								
 								const isMatch = card.searchTerm && 
 											  String(value).toLowerCase().includes(
 												  card.searchTerm.toLowerCase()
@@ -160,7 +193,7 @@ export const Modal = ({ card, onClose }) => {
 										<h3 className="text-secondary-400 font-medium mb-2 text-sm uppercase tracking-wider">
 											{Liber777[idx]?.index}
 										</h3>
-										<div className={`text-gray-300 font-medium 
+										<div className={`font-philosopher text-gray-300 font-medium 
 													   ${isMatch ? 'bg-primary-500/20 rounded px-2' : ''}`}>
 											{typeof value === 'string' && value.startsWith('#')
 												? (

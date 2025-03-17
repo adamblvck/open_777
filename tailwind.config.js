@@ -33,6 +33,9 @@ module.exports = {
 	        950: '#4a044e',
 	      },
 	    },
+	    fontFamily: {
+	      philosopher: ['Philosopher', 'serif'],
+	    },
 	  },
 	},
 	plugins: [],

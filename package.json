@@ -5,6 +5,7 @@
   "homepage": "http://adamblvck.github.io/open_777",
   "dependencies": {
     "@glideapps/glide-data-grid": "^5.2.1",
+    "@heroicons/react": "^2.2.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
