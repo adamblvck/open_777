@@ -26,6 +26,8 @@ import SearchBar from './components/search/SearchBar';
 import { BookReader } from './components/BookReader';
 import { LiberO } from './constants/libero';
 
+import { drawTreeOfLife } from './utils/drawTreeOfLife';
+
 function App() {
 
 	const [showSearch, setShowSearch] = React.useState(false);
@@ -33,6 +35,8 @@ function App() {
 
 	// Add state for selected filter
     const [selectedFilter, setSelectedFilter] = React.useState("All");
+
+	const [showLiberORows, setShowLiberORows] = React.useState(false);
 
 	// Define the ranges for each filter
     const filterRanges = {
@@ -44,16 +48,62 @@ function App() {
 		"The Paths": [0, 12, 13, 14, 15, 16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35] // Rows 11 to 32
 	};
 
+	// Add the roman numeral patterns to match
+	const liberORomanNumerals = [
+		'I.', 'II.', 'III.', 'V.', 'VI.', 'VII.', 'IX.', 'XI.', 'XII.', 'XIV.', 
+		'XV.', 'XVI.', 'XVII.', 'XVIII.', 'XIX.', 'XXXIV.', 'XXXV.', 'XXXVIII.', 
+		'XXXIX.', 'XL.', 'XLI.', 'XLII.', 'XLV.', 'LIV.', 'LV.', 'LIX.', 'LX.', 
+		'LXI.', 'LXIII.', 'LXX.', 'LXXV.', 'LXXVII.', 'LXVIII.', 'LXXIX.', 
+		'LXXX.', 'LXXXI.', 'LXXXIII.', 'XCVII.', 'XCVIII.', 'XCIX.', 'C.', 
+		'CI.', 'CXVII.', 'CXVIII.', 'CXXXVII.', 'CXXXVIII.', 'CXXXIX.', 
+		'CLXXV.', 'CLXXVI.', 'CLXXVII.', 'CLXXXII.'
+	];
+
+	const [liber777, updateLiber777] = React.useState(Liber777);
+
 	const [columns, setColumns] = React.useState(TableColumns);
 
 	React.useEffect(() => {
-		const filteredColumns = TableColumns.filter((_, index) => filterRanges[selectedFilter].includes(index));
+		if (showLiberORows) {
+			// Filter rows where index starts with any of the Roman numerals
+			const filteredRows = Liber777.filter(row => 
+				liberORomanNumerals.some(numeral => 
+					row.index && row.index.startsWith(numeral)
+				)
+			);
+
+			// Sort rows based on the order in liberORomanNumerals
+			const sortedRows = filteredRows.sort((a, b) => {
+				// Find the matching numeral for each row
+				const aNumeral = liberORomanNumerals.find(num => a.index.startsWith(num));
+				const bNumeral = liberORomanNumerals.find(num => b.index.startsWith(num));
+				
+				// Get the index of each numeral in the liberORomanNumerals array
+				const aIndex = liberORomanNumerals.indexOf(aNumeral);
+				const bIndex = liberORomanNumerals.indexOf(bNumeral);
+				
+				// Sort based on the index
+				return aIndex - bIndex;
+			});
+
+			updateLiber777(sortedRows);
+		} else { 
+			updateLiber777(Liber777);
+		}
+	}, [showLiberORows]);
+
+	React.useEffect(() => {
+		const filteredColumns = TableColumns.filter((_, index) => filterRanges[selectedFilter].includes(index))
+			.map(col => ({
+				...col,
+				width: 130  // Add default width of 120
+			}));
 		setColumns(filteredColumns);
 	}, [selectedFilter]);
 
 	const getContent = React.useCallback(cell => {
 		const [col, row] = cell;
-		const dataRow = Liber777[row];
+		const dataRow = liber777[row];
 
 		// retrieve correct index, based on selected filter range
 		const filterSpecificColumn = filterRanges[selectedFilter][col];
@@ -123,14 +173,29 @@ function App() {
 
 	const [viewMode, setViewMode] = useState('cards');
 
-	// Update view mode on window resize
-	// useEffect(() => {
-	// 	const handleResize = () => {
-	// 		setViewMode(window.innerWidth <= 1024 ? 'cards' : 'table');
-	// 	};
-	// 	window.addEventListener('resize', handleResize);
-	// 	return () => window.removeEventListener('resize', handleResize);
-	// }, []);
+	// px-4 py-2 rounded-lg bg-gray-700 text-white hover:bg-purple-600 transition-colors text-sm
+
+	// Add the LiberO toggle button component
+	const LiberOToggle = () => (
+		<div className="flex items-center">
+			<button
+				onClick={() => setShowLiberORows(!showLiberORows)}
+				className={`px-1 py-1 mx-2 rounded flex flex-wrap text-sm ${
+					showLiberORows 
+						? 'bg-purple-600 text-white' 
+						: 'bg-gray-300 text-gray-700'
+				}`}
+			>
+				Show Liber O Rows
+			</button>
+			<div className="relative group">
+				<span className="cursor-help text-purple-400 font-bold text-xl align-middle justify-center">ⓘ</span>
+				<div className="absolute hidden group-hover:block bg-white border border-gray-200 rounded shadow-lg w-64 text-sm z-50 -left-32">
+					Shows only rows that correspond to Liber O instructions, identified by their Roman numeral prefixes.
+				</div>
+			</div>
+		</div>
+	);
 
 	const [selectedCard, setSelectedCard] = useState(null);
 
@@ -158,7 +223,7 @@ function App() {
 			const searchTermLower = term.toLowerCase().trim();
 
 			requestAnimationFrame(() => {
-				Liber777.forEach((row, rowIdx) => {
+				liber777.forEach((row, rowIdx) => {
 					for (let colIdx = 0; colIdx <= 34; colIdx++) {
 						const value = row[colIdx];
 						if (value && 
@@ -324,40 +389,39 @@ function App() {
 								}
 							}}
 						/>
-						<Slider
-							options={["All", "The Spheres", "The Planets", "The Zodiacs", "The Elements", "The Paths"]}
-							onChange={setSelectedFilter}
-						/>
+						<div className="flex items-center gap-2">
+							<Slider
+								options={["All", "The Spheres", "The Planets", "The Zodiacs", "The Elements", "The Paths"]}
+								onChange={setSelectedFilter}
+							/>
+							<span className="text-gray-400">•</span>
+							{ viewMode === 'table' ? <LiberOToggle /> : null }
+						</div>
+						
 					</>
 				)}
 
 				{/* Main content rendering */}
 				{viewMode === 'table' ? (
-					<div className="dataContainer">
+					<div className="w-full h-[calc(100vh-250px)] max-w-screen relative overflow-hidden">
 						<DataEditor
 							theme={DarkTheme}
-
 							onColumnResize={handleColumnResize}
-
 							freezeColumns={1}
 							experimental={{hyperWrapping:true}}
-
 							keybindings={{search: true}}
 							showSearch={showSearch}
 							getCellsForSelection={true}
 							onSearchClose={onSearchClose}
 							className="data"
 							getCellContent={getContent}
-
 							columns={columns}
-							rows={Liber777.length}
-
+							rows={liber777.length}
 							smoothScrollY={true}
+							headerHeight={100}
 							smoothScrollX={true}
-
 							drawCell={args => {
 								const { cell, rect, ctx } = args;
-
 								const cellColor = cell.displayData;
 								
 								if (cellColor === undefined) return;
@@ -379,8 +443,33 @@ function App() {
 				
 								return true;
 							}}
+							drawHeader={args => {
+								const { ctx, rect, column, columnIndex } = args;
+								
+								// Draw default header
+								ctx.fillStyle = "#1e1e1e";
+								ctx.fillRect(rect.x, rect.y, rect.width, rect.height);
+								
+								console.log(args);
 
-
+								// If it's the first column, draw the Tree of Life
+								if (columnIndex >= 1) {
+									drawTreeOfLife(ctx, rect, {
+										height: rect.height - 4, // Slightly smaller than header height
+										radiusSephira: (rect.height) / 20,
+										selected: [parseInt(`${column?.title}`.replace('bis', ''))], // Remove 'bis' before parsing
+										pathwayColor: "#fff"
+									});
+								}
+								
+								// Draw column title
+								ctx.fillStyle = "#ffffff";
+								ctx.font = "12px sans-serif";
+								ctx.textAlign = "center";
+								ctx.fillText(column.title, rect.x + 15, rect.y + rect.height /2 );
+								
+								return true;
+							}}
 						/>
 					</div>
 				) : viewMode === 'cards' ? (
@@ -396,8 +485,6 @@ function App() {
 					<BookReader book={LiberO} />
 				)}
 
-				
-
 				<Modal 
 					card={selectedCard} 
 					onClose={() => setSelectedCard(null)} 
@@ -405,7 +492,7 @@ function App() {
 
 				<InfoModal isOpen={showInfo} onClose={() => setShowInfo(false)} />
 
-				<div className="footer">Made with ❤️ by ADAM BLVCK | <a className="opensourcelink" href="https://github.com/adamblvck/open_777">This Project is Open Source</a></div>
+				<div className="footer">Made with ❤️ by Adam Blvck | <a className="opensourcelink" href="https://github.com/adamblvck/open_777">This Project is Open Source</a></div>
 			</div>
 		</div>
 	);

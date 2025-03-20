@@ -1,6 +1,6 @@
 // Update this version number whenever you want to trigger an update
 const CACHE_NAME = 'open777-v1.0.1';
-const VERSION = 2;
+const VERSION = 3;
 
 // Get the scope from the location
 const getScope = () => {
