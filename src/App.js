@@ -26,7 +26,7 @@ import SearchBar from './components/search/SearchBar';
 import { BookReader } from './components/BookReader';
 import { LiberO } from './constants/libero';
 
-import { drawTreeOfLife } from './utils/drawTreeOfLife';
+import { drawTreeOfLife } from './components/drawTreeOfLife';
 
 function App() {
 
@@ -290,7 +290,7 @@ function App() {
 			<div className="flex items-center gap-2">
 				<button
 					onClick={() => setViewMode('table')}
-					className={`text-sm px-4 py-2 rounded-l-lg ${
+					className={`text-sm px-4 py-2 rounded-l-lg min-w-[80px] h-[40px] flex items-center justify-center ${
 						viewMode === 'table' 
 						? 'bg-purple-600 text-white' 
 						: 'bg-gray-200 text-gray-700'
@@ -300,7 +300,7 @@ function App() {
 				</button>
 				<button
 					onClick={() => setViewMode('cards')}
-					className={`text-sm px-4 py-2 ${
+					className={`text-sm px-4 py-2 min-w-[80px] h-[40px] flex items-center justify-center ${
 						viewMode === 'cards' 
 						? 'bg-purple-600 text-white' 
 						: 'bg-gray-200 text-gray-700'
@@ -310,7 +310,7 @@ function App() {
 				</button>
 				<button
 					onClick={() => setViewMode('liber-o')}
-					className={`text-sm px-4 py-2 rounded-r-lg ${
+					className={`text-sm px-2 py-2 rounded-r-lg min-w-[80px] h-[40px] flex items-center justify-center ${
 						viewMode === 'liber-o' 
 						? 'bg-purple-600 text-white' 
 						: 'bg-gray-200 text-gray-700'
@@ -449,8 +449,6 @@ function App() {
 								// Draw default header
 								ctx.fillStyle = "#1e1e1e";
 								ctx.fillRect(rect.x, rect.y, rect.width, rect.height);
-								
-								console.log(args);
 
 								// If it's the first column, draw the Tree of Life
 								if (columnIndex >= 1) {
@@ -466,7 +464,12 @@ function App() {
 								ctx.fillStyle = "#ffffff";
 								ctx.font = "12px sans-serif";
 								ctx.textAlign = "center";
-								ctx.fillText(column.title, rect.x + 15, rect.y + rect.height /2 );
+
+								if (columnIndex >= 0) {
+									ctx.fillText(column.title, rect.x + 20, rect.y + rect.height /2 );
+								} else {
+									ctx.fillText(column.title, rect.x + rect.width/2, rect.y + rect.height /2 );
+								}
 								
 								return true;
 							}}

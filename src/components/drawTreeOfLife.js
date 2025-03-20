@@ -9,8 +9,6 @@ export const drawTreeOfLife = (ctx, rect, { height, radiusSephira = 4, selected 
     // Third of circle radius
     const r_3 = height / 3 / 2;
 
-    console.log("selected", selected);
-
     const hexagramAngle = 2 * Math.PI / 6.0;
     const sidePillarXOffset = Math.sin(hexagramAngle) * r_3;
     const sidePillarYOffset = r_3 - Math.cos(hexagramAngle) * r_3;
