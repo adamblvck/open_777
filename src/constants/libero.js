@@ -1,3 +1,9 @@
+import fire_pentagram from '../assets/fire_pentagram.png';
+import water_pentagram from '../assets/water_pentagram.png';
+import air_pentagram from '../assets/air_pentagram.png';
+import earth_pentagram from '../assets/earth_pentagram.png';
+import spirit_pentagram from '../assets/spirit_pentagram.png';
+
 export const LiberO = {
 	"title": "Liber O vel Manus et Sagittae",
 	"subtitle": "SVB FIGVR VI",
@@ -114,23 +120,23 @@ export const LiberO = {
 			  },
 			  {
 				"verse": "1.4",
-				"text": "THE PENTAGRAMS OF SPIRIT\n\n$$$\n            '                     '             Equilibrium of Actives\n          /  \\                  /  \n *      /    \\         #      /    \\           Name: A H I H (Eheieh)\n   \\----------------     \\----------------\n    \\ '/ .    . \\'        \\ '/ .    . \\'\n     \\/  . \"  .  \\         \\/  . \"  .  \nI    /'\\'        ' \\        /'\\'        ' \\    B\nN      \\                     \\               A\nV       #                     *              N\nO                                            I\nK           '                     '          S  Equilibrium of Passives\nI         /  \\                  /  \\         H\nN        /    \\      *         /    \\      # I  Name A G L A (Agla).\nG   ----------------/     ----------------/  N\n      '/ .    . \\' /        '/ .    . \\' /   G\n      /  . \"  .  \\/         /  . \"  .  \\/\n     / '        '/\\        / '        '/\n               /                     /\n               #                     *\n$$$\n"
+				"text": "THE PENTAGRAMS OF SPIRIT\n\n {spirit_pentagram}"
 			  },
 			  {
 				"verse": "1.5",
-				"text": "THE PENTAGRAMS OF FIRE\n\n$$$\n I           '                     '          B\n N         /  \\ #                /  \\ *       A  Name: A L H I M\n V        /    \\ \\              /    \\ \\      N\n O   -------------\\--      -------------\\--   I   (Elohim).\n K     '/ .    . \\'\\         '/ .    . \\'\\    S\n I     /  . \"  .  \\ \\        /  . \"  .  \\ \\   H\n N    / '        ' \\ *      / '        ' \\ #  I\n G                                            N\n                                              G\n$$$\n\n{20} The signs of 4° = 7°: Raise the arms above the head and join the hands, so that the tips of the fingers and of the thumbs meet, forming a triangle (\"See\" illustration).\n(The Grade of 4° = 7° is particularly attributed to the element Fire; it refers to the planet Venus; the paths of Qof, Tzaddi and Peh are attributed to this degree. For other attributions see \"777\" lines 7 and 31.)"
+				"text": "THE PENTAGRAMS OF FIRE\n\n{fire_pentagram}"
 			  },
 			  {
 				"verse": "1.6",
-				"text": "THE PENTAGRAMS OF WATER\n\n$$$\n I           '                     '          B\n N         /  \\                  /  \\         A\n V     #----------*          *---------#      N\n O   ----------------      ----------------   I Name: A L (El).\n K     '/ .    . \\'          '/ .    . \\'     S\n I     /  . \"  .  \\          /  . \"  .  \\     H\n N    / '        ' \\        / '        ' \\    I\n G                                            N\n                                              G\n$$$\n\nThe signs of 3° = 8°: Raise the arms till the elbows are level with the shoulders, bring the hands across the chest, touching thumbs and fingertips so as to form a downward-pointing triangle. (3° = 8° is particularly attributed to Water; it refers to the planet Mercury; the paths of Resh and Shin are attributed to this degree. See \"777\" lines 8 and 23.)"
+				"text": "THE PENTAGRAMS OF WATER\n\n{water_pentagram}"
 			  },
 			  {
 				"verse": "1.7",
-				"text": "THE PENTAGRAMS OF AIR\n\n$$$\n I           '                     '          B\n N         /  \\                  /  \\         A\n V     *----------#          #---------*      N Name: I H V H\n O   ----------------      ----------------   I  (Ye-ho-wau).\n K     '/ .    . \\'          '/ .    . \\'     S\n I     /  . \"  .  \\          /  . \"  .  \\     H\n N    / '        ' \\        / '        ' \\    I\n G                                            N\n                                              G\n$$$\n\nThe signs of 2° = 9°: Stretch both arms upwards and outwards, elbows at right angles, hands bent back, palms upwards as if supporting a weight. (2° = 9° is particularly attributed to Air; it refers to the Moon; the path of Taw is attributed to this degree. For other attributions see \"777\" lines 9 and 11.)"
+				"text": "THE PENTAGRAMS OF AIR\n\n{air_pentagram}"
 			  },
 			  {
 				"verse": "1.8",
-				"text": "THE PENTAGRAMS OF EARTH\n\n$$$\n I           '                     '          B\n N      #  /  \\               *  /  \\         A\n V     /  /    \\             /  /    \\        N\n O   -/--------------      -/--------------   I  Name: A D N I (Adonai).\n K   / '/ .    . \\'        / '/ .    . \\'     S\n I  /  /  . \"  .  \\       /  /  . \"  .  \\     H\n N *  / '        ' \\     #  / '        ' \\    I\n G                                            N\n                                              G\n$$$\n\nThe Sign of 1° = 10°: Advance the right foot, stretch out the right hand upwards and forwards, the left hand downwards and backwards, the palms open. (1° = 10° is particularly attributed to Earth; see \"777\" lines 10 and 32 bis.)"
+				"text": "THE PENTAGRAMS OF EARTH\n\n{earth_pentagram}"
 			  },
 			  {
 				"verse": "1.9",
@@ -243,6 +249,13 @@ export const LiberO = {
 		  }
 		]
 	  }
-	]
+	],
+	"images": {
+		"fire_pentagram": fire_pentagram,
+		"water_pentagram": water_pentagram,
+		"air_pentagram": air_pentagram,
+		"earth_pentagram": earth_pentagram,
+		"spirit_pentagram": spirit_pentagram
+	}
   }
   

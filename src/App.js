@@ -25,8 +25,12 @@ import SearchBar from './components/search/SearchBar';
 
 import { BookReader } from './components/BookReader';
 import { LiberO } from './constants/libero';
+import { LiberE } from './constants/libere';
 
 import { drawTreeOfLife } from './components/drawTreeOfLife';
+import SizeSelector from './components/SizeSelector';
+
+import { VERSION_STRING } from './version';
 
 function App() {
 
@@ -180,17 +184,17 @@ function App() {
 		<div className="flex items-center">
 			<button
 				onClick={() => setShowLiberORows(!showLiberORows)}
-				className={`px-1 py-1 mx-2 rounded flex flex-wrap text-sm ${
+				className={`px-4 py-2 rounded-lg bg-gray-700 text-white hover:bg-purple-600 transition-colors text-sm ${
 					showLiberORows 
-						? 'bg-purple-600 text-white' 
-						: 'bg-gray-300 text-gray-700'
+						? 'bg-purple-600'
+						: 'bg-gray-700'
 				}`}
 			>
-				Show Liber O Rows
+				Liber O Rows
 			</button>
 			<div className="relative group">
-				<span className="cursor-help text-purple-400 font-bold text-xl align-middle justify-center">ⓘ</span>
-				<div className="absolute hidden group-hover:block bg-white border border-gray-200 rounded shadow-lg w-64 text-sm z-50 -left-32">
+				<span className="ml-2 cursor-help text-purple-400 font-bold text-xl align-middle justify-center">ⓘ</span>
+				<div className="absolute hidden group-hover:block bg-gray-700 text-white border border-gray-200 rounded-xl shadow-lg w-64 text-sm z-50 -left-32">
 					Shows only rows that correspond to Liber O instructions, identified by their Roman numeral prefixes.
 				</div>
 			</div>
@@ -261,29 +265,6 @@ function App() {
 		debouncedSearch(value);
 	}, [debouncedSearch]);
 
-	// Define SizeSelector before it's used
-	const SizeSelector = () => (
-        <div className="flex items-center gap-1 bg-gray-800/50 p-1 rounded-lg">
-            {[
-                { size: 'small', icon: '□' },
-                { size: 'medium', icon: '▢' },
-                { size: 'large', icon: '■' }
-            ].map(({ size, icon }) => (
-                <button
-                    key={size}
-                    onClick={() => setCardSize(size)}
-                    className={`w-8 h-8 flex items-center justify-center rounded-md transition-colors ${
-                        cardSize === size 
-                        ? 'bg-purple-600 text-white' 
-                        : 'text-gray-400 hover:bg-gray-700/50'
-                    }`}
-                >
-                    {icon}
-                </button>
-            ))}
-        </div>
-    );
-
 	// ViewToggle component that uses SizeSelector
 	const ViewToggle = () => (
 		<div className="flex items-center gap-4 p-2">
@@ -310,7 +291,7 @@ function App() {
 				</button>
 				<button
 					onClick={() => setViewMode('liber-o')}
-					className={`text-sm px-2 py-2 rounded-r-lg min-w-[80px] h-[40px] flex items-center justify-center ${
+					className={`text-sm px-4 py-2 min-w-[80px] h-[40px] flex items-center justify-center ${
 						viewMode === 'liber-o' 
 						? 'bg-purple-600 text-white' 
 						: 'bg-gray-200 text-gray-700'
@@ -318,8 +299,17 @@ function App() {
 				>
 					Liber O
 				</button>
+				<button
+					onClick={() => setViewMode('liber-e')}
+					className={`text-sm px-2 py-2 rounded-r-lg min-w-[80px] h-[40px] flex items-center justify-center ${
+						viewMode === 'liber-e' 
+						? 'bg-purple-600 text-white' 
+						: 'bg-gray-200 text-gray-700'
+					}`}
+				>
+					Liber E
+				</button>
 			</div>
-			{viewMode === 'cards' && <SizeSelector />}
 		</div>
 	);
 
@@ -371,7 +361,7 @@ function App() {
 				<div className="h-4"/>
 
 				{/* Only show SearchBar and Slider for table/cards view */}
-				{viewMode !== 'liber-o' && (
+				{viewMode !== 'liber-o' && viewMode !== 'liber-e' && (
 					<>
 						<SearchBar 
 							viewMode={viewMode}
@@ -394,16 +384,22 @@ function App() {
 								options={["All", "The Spheres", "The Planets", "The Zodiacs", "The Elements", "The Paths"]}
 								onChange={setSelectedFilter}
 							/>
-							<span className="text-gray-400">•</span>
-							{ viewMode === 'table' ? <LiberOToggle /> : null }
+							
+							{ viewMode === 'table' ? <div className="flex items-center gap-2">
+								<span className="text-gray-400">•</span>
+								<LiberOToggle />
+								</div>
+							: null }
 						</div>
-						
+						{ viewMode === 'cards' ? <div className="flex items-center self-end gap-2">
+							<SizeSelector cardSize={cardSize} setCardSize={setCardSize} />
+						</div> : null }
 					</>
 				)}
 
 				{/* Main content rendering */}
 				{viewMode === 'table' ? (
-					<div className="w-full h-[calc(100vh-250px)] max-w-screen relative overflow-hidden">
+					<div className="w-full h-[calc(100vh-250px)] max-w-screen relative overflow-hidden rounded-xl min-h-[550px]">
 						<DataEditor
 							theme={DarkTheme}
 							onColumnResize={handleColumnResize}
@@ -465,7 +461,7 @@ function App() {
 								ctx.font = "12px sans-serif";
 								ctx.textAlign = "center";
 
-								if (columnIndex >= 0) {
+								if (columnIndex > 0) {
 									ctx.fillText(column.title, rect.x + 20, rect.y + rect.height /2 );
 								} else {
 									ctx.fillText(column.title, rect.x + rect.width/2, rect.y + rect.height /2 );
@@ -485,7 +481,7 @@ function App() {
 						setSelectedCard={setSelectedCard}
 					/>
 				) : (
-					<BookReader book={LiberO} />
+					<BookReader book={viewMode === 'liber-o' ? LiberO : LiberE} />
 				)}
 
 				<Modal 
@@ -495,7 +491,10 @@ function App() {
 
 				<InfoModal isOpen={showInfo} onClose={() => setShowInfo(false)} />
 
-				<div className="footer">Made with ❤️ by Adam Blvck | <a className="opensourcelink" href="https://github.com/adamblvck/open_777">This Project is Open Source</a></div>
+				<div className="footer">
+					Made with ❤️ by Adam Blvck | <a className="opensourcelink" href="https://github.com/adamblvck/open_777">This Project is Open Source</a>
+					{" "} | v{VERSION_STRING}
+				</div>
 			</div>
 		</div>
 	);

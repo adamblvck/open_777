@@ -165,13 +165,39 @@ export const BookReader = ({ book }) => {
                                                                 }
                                                             }
 
-                                                            // Regular text line
-                                                            result.push(
-                                                                <span key={`text-${i}`} className="inline break-words">
-                                                                    {line}
-                                                                    {i < lines.length - 1 && <br />}
-                                                                </span>
-                                                            );
+                                                            // Check for image placeholders between curly braces
+                                                            const imageMatch = line.match(/{([^}]+)}/);
+                                                            if (imageMatch && book.images[imageMatch[1]]) {
+                                                                result.push(
+                                                                    <div key={`image-${i}`} className="flex justify-center my-8">
+                                                                        <div className="w-full md:w-[80%] relative aspect-square">
+                                                                            <img 
+                                                                                src={book.images[imageMatch[1]]} 
+                                                                                alt={imageMatch[1]}
+                                                                                className="w-full h-full object-contain" 
+                                                                            />
+                                                                        </div>
+                                                                    </div>
+                                                                );
+                                                                // Handle remaining text after image placeholder
+                                                                const remainingText = line.replace(/{[^}]+}/, '').trim();
+                                                                if (remainingText) {
+                                                                    result.push(
+                                                                        <span key={`text-${i}`} className="inline break-words">
+                                                                            {remainingText}
+                                                                            {i < lines.length - 1 && <br />}
+                                                                        </span>
+                                                                    );
+                                                                }
+                                                            } else {
+                                                                // Regular text line
+                                                                result.push(
+                                                                    <span key={`text-${i}`} className="inline break-words">
+                                                                        {line}
+                                                                        {i < lines.length - 1 && <br />}
+                                                                    </span>
+                                                                );
+                                                            }
                                                         }
 
                                                         return result;
