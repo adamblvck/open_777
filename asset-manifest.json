@@ -1,18 +1,23 @@
 {
   "files": {
-    "main.css": "/open_777/static/css/main.c15c9775.css",
-    "main.js": "/open_777/static/js/main.a1093540.js",
+    "main.css": "/open_777/static/css/main.36c71310.css",
+    "main.js": "/open_777/static/js/main.77079bce.js",
     "static/js/289.cb281e76.chunk.js": "/open_777/static/js/289.cb281e76.chunk.js",
     "static/js/453.9595aaab.chunk.js": "/open_777/static/js/453.9595aaab.chunk.js",
+    "static/media/spirit_pentagram.png": "/open_777/static/media/spirit_pentagram.31f98cfb55d7da1455bc.png",
+    "static/media/fire_pentagram.png": "/open_777/static/media/fire_pentagram.b1f9454bbd569c71bafa.png",
+    "static/media/air_pentagram.png": "/open_777/static/media/air_pentagram.2de9fea59c1d01e95e78.png",
+    "static/media/earth_pentagram.png": "/open_777/static/media/earth_pentagram.33dacd4e6bbab7cfbe80.png",
+    "static/media/water_pentagram.png": "/open_777/static/media/water_pentagram.857d879c3289657ecc2b.png",
     "static/media/logo_full_icon_transparent.png": "/open_777/static/media/logo_full_icon_transparent.1601bee7192e5a9310b7.png",
     "index.html": "/open_777/index.html",
-    "main.c15c9775.css.map": "/open_777/static/css/main.c15c9775.css.map",
-    "main.a1093540.js.map": "/open_777/static/js/main.a1093540.js.map",
+    "main.36c71310.css.map": "/open_777/static/css/main.36c71310.css.map",
+    "main.77079bce.js.map": "/open_777/static/js/main.77079bce.js.map",
     "289.cb281e76.chunk.js.map": "/open_777/static/js/289.cb281e76.chunk.js.map",
     "453.9595aaab.chunk.js.map": "/open_777/static/js/453.9595aaab.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c15c9775.css",
-    "static/js/main.a1093540.js"
+    "static/css/main.36c71310.css",
+    "static/js/main.77079bce.js"
   ]
 }
