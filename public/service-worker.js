@@ -1,5 +1,5 @@
 // Import version from package.json
-const { VERSION_STRING } = require('../src/version.js');
+import { VERSION_STRING } from '../src/version.js';
 
 // Update this version number whenever you want to trigger an update
 const CACHE_NAME = `open777-${VERSION_STRING}`;
@@ -10,20 +10,23 @@ self.APP_VERSION = VERSION;
 
 // Get the scope from the location
 const getScope = () => {
+  // For GitHub Pages, we need to handle the repository name in the path
   const path = self.location.pathname;
   const parts = path.split('/');
+  // If on GitHub Pages, the first part after the domain will be the repo name
+  const repoName = parts[1];
   return parts.slice(0, parts.length - 1).join('/') || '/';
 }
 
 const urlsToCache = [
   getScope(),
-  `${getScope()}/index.html`,
-  `${getScope()}/static/js/main.chunk.js`,
-  `${getScope()}/static/js/runtime-main.js`,
-  `${getScope()}/static/css/main.chunk.css`,
-  `${getScope()}/manifest.json`,
-  `${getScope()}/favicon.ico`,
-  `${getScope()}/background_image.jpg`
+  `${getScope()}index.html`,
+  `${getScope()}static/js/main.chunk.js`,
+  `${getScope()}static/js/runtime-main.js`,
+  `${getScope()}static/css/main.chunk.css`,
+  `${getScope()}manifest.json`,
+  `${getScope()}favicon.ico`,
+  `${getScope()}background_image.jpg`
 ];
 
 // Install service worker

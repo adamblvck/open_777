@@ -17,13 +17,13 @@ root.render(
 reportWebVitals();
 
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js')
-      .then(registration => {
-        console.log('SW registered:', registration);
-      })
-      .catch(error => {
-        console.log('SW registration failed:', error);
-      });
-  });
+  const scope = window.location.pathname; // This will include the repo name on GitHub Pages
+  navigator.serviceWorker
+    .register(`${scope}service-worker.js`, { scope: scope })
+    .then((registration) => {
+      console.log('Service Worker registered with scope:', registration.scope);
+    })
+    .catch((error) => {
+      console.error('Service Worker registration failed:', error);
+    });
 }
