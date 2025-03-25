@@ -40,7 +40,7 @@ export const Modal = ({ card, onClose }) => {
         'CLXXXII'
     ];
 
-	const cardNumber = parseInt(card.title) + 1;
+	const cardNumber = parseInt(card.title);
 	const cardName = pathsData[`${cardNumber}`]?.name;
 	const cardTitle = pathsData[`${cardNumber}`]?.title;
 	const cardDescription = pathsData[`${cardNumber}`]?.description;
@@ -118,7 +118,7 @@ export const Modal = ({ card, onClose }) => {
 									<TreeOfLife 
 										height={250} 
 										radiusSephira={15} 
-										selected={[parseInt(card.title) + 1]}
+										selected={[parseInt(card.title)]}
 										pathwayColor={card.data[19] || "#FFFFFF"}
 									/>
 								</div>
@@ -150,7 +150,7 @@ export const Modal = ({ card, onClose }) => {
 									<TreeOfLife 
 										height={250} 
 										radiusSephira={15} 
-										selected={[parseInt(card.title) + 1]}
+										selected={[parseInt(card.title)]}
 										pathwayColor={card.data[19] || "#FFFFFF"}
 									/>
 								</div>
