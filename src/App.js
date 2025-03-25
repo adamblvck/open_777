@@ -228,15 +228,24 @@ function App() {
 
 			requestAnimationFrame(() => {
 				liber777.forEach((row, rowIdx) => {
-					for (let colIdx = 0; colIdx <= 34; colIdx++) {
-						const value = row[colIdx];
-						if (value && 
-							typeof value === 'string' &&
-							value.trim() !== '' &&
-							value !== '...' && 
-							String(value).toLowerCase().includes(searchTermLower)) {
-							const key = `${rowIdx}-${colIdx}`; // card index colIdx, and rowIdx is the "correspondence number"
-							results.set(key, true);
+					// First check if there's a match in the row.index
+					if (row.index && 
+						String(row.index).toLowerCase().includes(searchTermLower)) {
+						// If row.index matches, add all columns for this row
+						for (let i = 0; i <= 34; i++) {
+							results.set(`${rowIdx}-${i}`, true);
+						}
+					} else {
+						for (let colIdx = 0; colIdx <= 34; colIdx++) {
+							const value = row[colIdx];
+							if (value && 
+								typeof value === 'string' &&
+								value.trim() !== '' &&
+								value !== '...' && 
+								String(value).toLowerCase().includes(searchTermLower)) {
+								const key = `${rowIdx}-${colIdx}`; // card index colIdx, and rowIdx is the "correspondence number"
+								results.set(key, true);
+							}
 						}
 					}
 				});
