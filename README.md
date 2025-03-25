@@ -8,6 +8,10 @@
 
 ![](./docs/screenshot_2025.png)
 
+## Changelog 2025 March 25th - v1.1.2
+
+- Improved search (card view substantially)
+
 ## Changelog 2025 March 9th
 
 - Added Card View
@@ -57,13 +61,13 @@ A recent contribution by an anonymous frater completed almost all columns from L
 
 ## Publishing to GitHub Pages
 
-To publish a new build:
+Ensure that you've setup github pages by isntalling it, then configure package.json properly, to ensure that the `homepage` points to the correct destination:
 
 ```
 npm install -g gh-pages --save-dev
 ```
 
-Then publish through:
+Then publish through, which will go through an react-app build process, after which the app will be deployed:
 
 ```
 npm run deploy
