@@ -12,6 +12,7 @@ export const CardView = ({
     setSelectedCard,
     reverseOrder
 }) => {
+
     const filteredColumns = TableColumns.filter((_, index) => 
         filterRanges[selectedFilter].includes(index)
     );

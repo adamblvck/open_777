@@ -45,11 +45,11 @@ function App() {
 	// Define the ranges for each filter
     const filterRanges = {
 		"All": Array.from({ length: 36 }, (_, i) => i), // first column is the keyscale, then follow 0 1-32, 31b, 32b = 36 columns!
-		"The Spheres": [0, 2, 3,4,5,6,7,8,9,10,11], // Rows 0 to 10
-		"The Planets": [0, 13, 14, 15, 22, 28, 31, 33], // Specific rows for Planets
-		"The Elements": [0, 12, 24, 32, 34, 35], // Specific rows for Planets
-		"The Zodiacs": [0, 16, 17, 18, 19, 20, 21, 23, 25, 26, 27, 29, 30], // Specific rows for Zodiacs
-		"The Paths": [0, 12, 13, 14, 15, 16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35] // Rows 11 to 32
+		"Spheres": [0, 2, 3,4,5,6,7,8,9,10,11], // Rows 0 to 10
+		"Planets": [0, 13, 14, 15, 22, 28, 31, 33], // Specific rows for Planets
+		"Elements": [0, 12, 24, 32, 34, 35], // Specific rows for Planets
+		"Zodiacs": [0, 16, 17, 18, 19, 20, 21, 23, 25, 26, 27, 29, 30], // Specific rows for Zodiacs
+		"Paths": [0, 12, 13, 14, 15, 16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35] // Rows 11 to 32
 	};
 
 	// Add the roman numeral patterns to match
