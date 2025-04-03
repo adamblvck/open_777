@@ -9,7 +9,8 @@ export const CardView = ({
     filterRanges, 
     debouncedTerm, 
     matchedFields,
-    setSelectedCard 
+    setSelectedCard,
+    reverseOrder
 }) => {
     const filteredColumns = TableColumns.filter((_, index) => 
         filterRanges[selectedFilter].includes(index)
@@ -24,6 +25,8 @@ export const CardView = ({
         })
         : filteredColumns;
 
+    const orderedCards = reverseOrder ? [...visibleCards].reverse() : visibleCards;
+
     console.log("matchedFields",matchedFields,  visibleCards);
 
     const gridClasses = {
@@ -34,7 +37,7 @@ export const CardView = ({
 
     return (
         <div className={gridClasses[cardSize]}>
-            {visibleCards.map((column, colIndex) => {
+            {orderedCards.map((column, colIndex) => {
                 if (column.id === 'index') return null;
                 return (
                     <Card

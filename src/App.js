@@ -203,14 +203,33 @@ function App() {
 
 	const [selectedCard, setSelectedCard] = useState(null);
 
-	// Add this state near your other useState declarations
-	const [cardSize, setCardSize] = useState('medium'); // 'small', 'medium', 'large'
+	// Replace the existing state declarations with these:
+	const [cardSize, setCardSize] = useState(() => {
+		const saved = localStorage.getItem('cardSize');
+		return saved || 'medium';
+	});
+
+	// Add these effects after the state declarations
+	useEffect(() => {
+		localStorage.setItem('cardSize', cardSize);
+	}, [cardSize]);
 
 	// Add these new states
 	const [searchTerm, setSearchTerm] = useState('');
 	const [debouncedTerm, setDebouncedTerm] = useState('');
 	const [matchedFields, setMatchedFields] = useState(new Map());
 	const [filteredResults, setFilteredResults] = useState(null);
+
+	// Add this near your other state declarations
+	const [reverseOrder, setReverseOrder] = useState(() => {
+		const saved = localStorage.getItem('reverseOrder');
+		return saved === 'true';
+	});
+
+	// Add these effects after the state declarations
+	useEffect(() => {
+		localStorage.setItem('reverseOrder', reverseOrder);
+	}, [reverseOrder]);
 
 	// Create debounced search function
 	const debouncedSearch = useMemo(
@@ -222,28 +241,48 @@ function App() {
 				return;
 			}
 
+			// Split search terms by comma and trim each term
+			const searchTerms = term.toLowerCase()
+				.split(',')
+				.map(t => t.trim())
+				.filter(t => t.length > 0);
+
 			// Batch our state updates
 			const results = new Map();
-			const searchTermLower = term.toLowerCase().trim();
 
 			requestAnimationFrame(() => {
 				liber777.forEach((row, rowIdx) => {
-					// First check if there's a match in the row.index
+					// Check if row.index matches any search term
 					if (row.index && 
-						String(row.index).toLowerCase().includes(searchTermLower)) {
+						searchTerms.some(term => {
+							// If term contains a dot, use startsWith for exact matching
+							if (term.includes('.')) {
+								return String(row.index).toLowerCase().startsWith(term);
+							}
+							// Otherwise use includes for broader matching
+							return String(row.index).toLowerCase().includes(term);
+						})) {
 						// If row.index matches, add all columns for this row
 						for (let i = 0; i <= 34; i++) {
 							results.set(`${rowIdx}-${i}`, true);
 						}
 					} else {
+						// Check each column value against all search terms
 						for (let colIdx = 0; colIdx <= 34; colIdx++) {
 							const value = row[colIdx];
 							if (value && 
 								typeof value === 'string' &&
 								value.trim() !== '' &&
 								value !== '...' && 
-								String(value).toLowerCase().includes(searchTermLower)) {
-								const key = `${rowIdx}-${colIdx}`; // card index colIdx, and rowIdx is the "correspondence number"
+								searchTerms.some(term => {
+									// If term contains a dot, use startsWith for exact matching
+									if (term.includes('.')) {
+										return String(value).toLowerCase().startsWith(term);
+									}
+									// Otherwise use includes for broader matching
+									return String(value).toLowerCase().includes(term);
+								})) {
+								const key = `${rowIdx}-${colIdx}`;
 								results.set(key, true);
 							}
 						}
@@ -256,7 +295,7 @@ function App() {
 					setMatchedFields(results);
 				});
 			});
-		}, 750), // Increased debounce delay to 750ms
+		}, 750),
 		[]
 	);
 
@@ -283,7 +322,7 @@ function App() {
 					className={`text-sm px-4 py-2 rounded-l-lg min-w-[80px] h-[40px] flex items-center justify-center ${
 						viewMode === 'table' 
 						? 'bg-purple-600 text-white' 
-						: 'bg-gray-200 text-gray-700'
+						: 'bg-gray-300 text-gray-700'
 					}`}
 				>
 					Table
@@ -293,7 +332,7 @@ function App() {
 					className={`text-sm px-4 py-2 min-w-[80px] h-[40px] flex items-center justify-center ${
 						viewMode === 'cards' 
 						? 'bg-purple-600 text-white' 
-						: 'bg-gray-200 text-gray-700'
+						: 'bg-gray-300 text-gray-700'
 					}`}
 				>
 					Cards
@@ -303,7 +342,7 @@ function App() {
 					className={`text-sm px-4 py-2 min-w-[80px] h-[40px] flex items-center justify-center ${
 						viewMode === 'liber-o' 
 						? 'bg-purple-600 text-white' 
-						: 'bg-gray-200 text-gray-700'
+						: 'bg-gray-300 text-gray-700'
 					}`}
 				>
 					Liber O
@@ -313,7 +352,7 @@ function App() {
 					className={`text-sm px-2 py-2 rounded-r-lg min-w-[80px] h-[40px] flex items-center justify-center ${
 						viewMode === 'liber-e' 
 						? 'bg-purple-600 text-white' 
-						: 'bg-gray-200 text-gray-700'
+						: 'bg-gray-300 text-gray-700'
 					}`}
 				>
 					Liber E
@@ -388,9 +427,9 @@ function App() {
 								}
 							}}
 						/>
-						<div className="flex items-center gap-2">
+						<div className="flex items-center border border-gray-700 rounded-xl p-1 mb-4">
 							<Slider
-								options={["All", "The Spheres", "The Planets", "The Zodiacs", "The Elements", "The Paths"]}
+								options={["All", "Spheres", "Planets", "Zodiacs", "Elements", "Paths"]}
 								onChange={setSelectedFilter}
 							/>
 							
@@ -400,7 +439,19 @@ function App() {
 								</div>
 							: null }
 						</div>
-						{ viewMode === 'cards' ? <div className="flex items-center self-end gap-2">
+						{ viewMode === 'cards' ? <div className="flex items-center self-end gap-2 mb-4">
+							<button
+								onClick={() => setReverseOrder(prev => !prev)}
+								className={`px-4 py-2 rounded-lg text-sm ${
+									reverseOrder 
+										? 'bg-purple-600 text-white' 
+										: 'bg-gray-700 text-white hover:bg-purple-600'
+								} transition-colors`}
+							>
+								<span className="flex items-center gap-1">
+									{reverseOrder ? '↑' : '↓'} Reverse
+								</span>
+							</button>
 							<SizeSelector cardSize={cardSize} setCardSize={setCardSize} />
 						</div> : null }
 					</>
@@ -488,6 +539,7 @@ function App() {
 						debouncedTerm={debouncedTerm}
 						matchedFields={matchedFields}
 						setSelectedCard={setSelectedCard}
+						reverseOrder={reverseOrder}
 					/>
 				) : (
 					<BookReader book={viewMode === 'liber-o' ? LiberO : LiberE} />
@@ -496,6 +548,8 @@ function App() {
 				<Modal 
 					card={selectedCard} 
 					onClose={() => setSelectedCard(null)} 
+					matchedFields={matchedFields}
+					searchTerm={searchTerm}
 				/>
 
 				<InfoModal isOpen={showInfo} onClose={() => setShowInfo(false)} />

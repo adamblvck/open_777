@@ -28,13 +28,14 @@ const SizeSelector = ({ cardSize, setCardSize }) => {
         <div className="relative" ref={dropdownRef}>
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 
-                          text-gray-200 border border-gray-700 transition-colors"
+                className={`px-4 py-2 rounded-lg text-sm text-white
+                            ${isOpen ? 'bg-purple-600' : 'bg-gray-700 hover:bg-purple-600'}
+                            transition-colors flex items-center gap-1`}
             >
                 <span>{currentOption.icon}</span>
-                <span className="text-sm">{currentOption.label}</span>
+                <span>{currentOption.label}</span>
                 <svg 
-                    className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+                    className={`w-3 h-3 transition-transform ${isOpen ? 'rotate-180' : ''}`}
                     fill="none" 
                     stroke="currentColor" 
                     viewBox="0 0 24 24"
@@ -44,8 +45,7 @@ const SizeSelector = ({ cardSize, setCardSize }) => {
             </button>
 
             {isOpen && (
-                <div className="absolute mt-2 py-2 w-36 bg-gray-800 border border-gray-700 
-                              rounded-lg shadow-lg z-50">
+                <div className="absolute mt-1 py-1 w-32 bg-gray-800 rounded-lg shadow-lg z-50">
                     {sizeOptions.map(({ size, icon, label }) => (
                         <button
                             key={size}
@@ -53,10 +53,10 @@ const SizeSelector = ({ cardSize, setCardSize }) => {
                                 setCardSize(size);
                                 setIsOpen(false);
                             }}
-                            className={`w-full px-4 py-2 text-sm flex items-center gap-2
+                            className={`w-full px-4 py-2 text-sm flex items-center gap-1
                                       ${cardSize === size 
                                         ? 'bg-purple-600 text-white' 
-                                        : 'text-gray-300 hover:bg-gray-700'
+                                        : 'text-white hover:bg-purple-600'
                                       } transition-colors`}
                         >
                             <span>{icon}</span>

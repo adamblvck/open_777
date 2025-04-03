@@ -173,7 +173,7 @@ color: #4B0082;;
 }
 
 .selector {
-    @apply flex flex-wrap gap-2 p-4 text-sm;
+    @apply flex flex-wrap gap-2 p-1 m-1 text-sm;
     align-items: center;
     justify-content: center;
 }

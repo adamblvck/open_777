@@ -61,7 +61,8 @@ export const Card = ({
             title: "text-xs font-bold text-primary-300 mb-1",
             treeHeight: 80,
             radiusSephira: 4,
-            showDetails: false
+            showDetails: true,
+            treeContainer: "flex justify-center items-center mb-1"
         },
         medium: {
             container: "p-2 rounded-2xl",
@@ -120,11 +121,11 @@ export const Card = ({
 					{debouncedTerm ? (
 						// Show matched fields when searching
 						matchedValues.map(({value, rowIdx}) => {
-							{console.log("matchedValues", columnIndex, rowIdx, value)}
+							if (value === '...') return null;
 							return (
 								<p key={rowIdx} 
-								className="text-gray-300 text-sm bg-primary-500/20 rounded-xl px-1">
-									<span className="text-xs text-primary-400">
+								className={`text-gray-300 ${cardSize === 'small' ? 'text-xs' : 'text-sm'} bg-primary-500/20 rounded-xl px-1`}>
+									<span className={`${cardSize === 'small' ? 'text-[10px]' : 'text-xs'} text-primary-400`}>
 										{Liber777[rowIdx].index}:
 									</span>
 									<br />
@@ -134,8 +135,8 @@ export const Card = ({
 						})
 					) : (
 						// Show regular preview when not searching
-						values.slice(0, cardSize === 'medium' ? 2 : 3).map((value, idx) => (
-							<p key={idx} className="text-gray-300 text-sm">
+						values.slice(0, cardSize === 'small' ? 1 : (cardSize === 'medium' ? 2 : 3)).map((value, idx) => (
+							<p key={idx} className={`text-gray-300 ${cardSize === 'small' ? 'text-xs' : 'text-sm'}`}>
 								{value}
 							</p>
 						))
