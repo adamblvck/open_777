@@ -3,7 +3,7 @@ import { VERSION_STRING } from '../src/version.js';
 
 // Update this version number whenever you want to trigger an update
 const CACHE_NAME = `open777-${VERSION_STRING}`;
-const VERSION = 7;
+const VERSION = 8;
 
 // Add this line after VERSION declaration
 self.APP_VERSION = VERSION;
