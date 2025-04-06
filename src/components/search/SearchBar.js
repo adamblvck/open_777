@@ -63,7 +63,7 @@ const SearchBar = ({
 		{ deletable: false, name: 'Sight', query: 'xiv., xv., xvi., xvii., xviii., xx., xix., xxxiv., xxxiii., xxii., xxxv., xxxvi., xxxviii., xlix., clxxxi., clxxv., li., lii., liii., clxxxiii.' },
 		{ deletable: false, name: 'Hearing', query: 'v., clxxxvii.' },
 		{ deletable: false, name: 'Smell & Taste', query: 'xxxix., xlii.' },
-		{ deletable: false, name: 'Psychic', query: 'xlii., xxiii.' },
+		{ deletable: false, name: 'Astral', query: 'xliii., xxiii.' },
 		{ deletable: false, name: 'Causal', query: 'xxiv., xlv.' },
 	];
 
