@@ -25,7 +25,7 @@
 
 Open 777 is a small online website for easily looking up Crowley's Esoteric Kabbalistic / Qabalistic correspondences, meant for Esoteric Study & Practice.
 
-The website consists of transcriptions done by [ADAM BLVCK](https://adamblvck.com) from the now in open-domain book "777" by Aleister Crowley (with the help of Occultish Angel (see IG), and Frater Conditor Nubium from [Liber Oz](https://liberoz.org/)). Attributions into Sight, Hearing, Smell & Taste, Astral and Causal have been provided and credited by Jason Louv (@magickme) from [Magick Me](magick.me).
+The website consists of transcriptions done by [ADAM BLVCK](https://adamblvck.com) from the now in open-domain book "777" by Aleister Crowley (with the help of Occultish Angel (see IG), and Frater Conditor Nubium from [Liber Oz](https://liberoz.org/)). Attributions into Sight, Hearing, Smell & Taste, Astral and Causal have been provided and credited by Jason Louv ([@magickme]) from [Magick Me](magick.me).
 
 This digital reference tool is designed to make Aleister Crowley's system of correspondences more accessible and interactive, serving as a bridge between traditional occult knowledge and contemporary technological convenience. The primary source, "Liber 777" (published in 1909), is a fundamental text in Western esoteric traditions that contains detailed tables of correspondences between various magical and mystical traditions, including Kabbalah, Tarot, astrology, numerology, and more.
 
