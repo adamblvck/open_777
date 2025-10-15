@@ -37,7 +37,7 @@ export const InfoModal = ({ isOpen, onClose }) => {
 						This application allows you to explore these correspondences through both a traditional table view and an innovative card-based interface. You can filter the information by categories such as Spheres, Planets, Zodiacs, Elements, and Paths, making it easier to focus on specific aspects of the system. Each entry is carefully preserved from the original source while being presented in a format that's more accessible to modern practitioners.
 					</p>
 					<p className="leading-relaxed border-t border-primary-700/20 pt-3 sm:pt-4 text-xs sm:text-sm">
-						Transcription credits (Liber 777): <a href="https://adamblvck.com" target="_blank" className="text-primary-400 hover:text-primary-300 transition-colors">Adam Blvck</a>, Occultish Angel, Liber OZ.
+						Transcription credits (Liber 777): <a href="https://adamblvck.com" target="_blank" className="text-primary-400 hover:text-primary-300 transition-colors">Adam Blvck</a>, Occultish Angel, Frater Conditor Nubium.
 						<br/>
 						Pathway paragraphs have been scraped from <a href="https://namu.wiki/w/%EB%A6%AC%EB%B2%A8%20777" target="_blank" rel="noopener noreferrer" className="text-primary-400 hover:text-primary-300 transition-colors">Namu Wiki</a>.
 						<br/>
