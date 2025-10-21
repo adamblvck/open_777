@@ -57,7 +57,9 @@ A recent contribution by an anonymous frater completed almost all columns from L
 
 **Please note, that this app capture's Aleister Crowley's Correspondences, not all other correspondences from the many esotericists out there. The idea to capture many magicinan's correspondences in a beautiful correspondence platform is a truly blessed idea.**
 
-### 🜁🜂 Visit [Open 777 Here](https://adamblvck.github.io/open_777/) 🜄🜃
+### 🜁🜂 Visit [Open 777 Here](https://dazzling-gaufre-e40c33.netlify.app/) 🜄🜃
+
+Backup link if down: https://open777.netlify.app/
 
 ## Publishing to GitHub Pages
 

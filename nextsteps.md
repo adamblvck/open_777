@@ -1,0 +1,13 @@
+Next steps:
+- Add logo
+- Add bottom icons
+- Add tutorial explanation of how to prepare a ritual for Astral Travel
+- Add animations for drawing unicursal hexagrams, and explaining it
+- Adding a section for remembering Liber O based attributions
+- Adding and generatin a bunch of images for the app
+- Ensuring proper alignment of cards
+- Making the information screen more attractive
+- Add a "My Focus" tab, for focused analysis of correspondences
+- Adding a ton of other books into Open777
+- Expanding About Section
+- 
