@@ -4,7 +4,8 @@
   <img width="auto" height="120" src="./docs/docs_logo.png">
 </p>
 
-### 🜁🜂 Visit [Open 777 Here](https://adamblvck.github.io/open_777/) 🜄🜃
+
+### 🜁🜂 Visit [Open 777 Here](https://dazzling-gaufre-e40c33.netlify.app/) 🜄🜃
 
 ![](./docs/screenshot_2025.png)
 
