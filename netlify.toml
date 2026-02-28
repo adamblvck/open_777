@@ -1,0 +1,11 @@
+[build]
+  command = "PUBLIC_URL=/ npm run build"
+  publish = "build"
+
+[build.environment]
+  CI = "false"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
