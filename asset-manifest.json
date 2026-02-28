@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/open_777/static/css/main.c220f38d.css",
-    "main.js": "/open_777/static/js/main.0b321115.js",
+    "main.css": "/open_777/static/css/main.19a72efc.css",
+    "main.js": "/open_777/static/js/main.44e24b6a.js",
     "static/js/289.cb281e76.chunk.js": "/open_777/static/js/289.cb281e76.chunk.js",
     "static/js/453.9595aaab.chunk.js": "/open_777/static/js/453.9595aaab.chunk.js",
     "static/media/spirit_pentagram.png": "/open_777/static/media/spirit_pentagram.31f98cfb55d7da1455bc.png",
@@ -11,13 +11,13 @@
     "static/media/water_pentagram.png": "/open_777/static/media/water_pentagram.857d879c3289657ecc2b.png",
     "static/media/logo_full_icon_transparent.png": "/open_777/static/media/logo_full_icon_transparent.1601bee7192e5a9310b7.png",
     "index.html": "/open_777/index.html",
-    "main.c220f38d.css.map": "/open_777/static/css/main.c220f38d.css.map",
-    "main.0b321115.js.map": "/open_777/static/js/main.0b321115.js.map",
+    "main.19a72efc.css.map": "/open_777/static/css/main.19a72efc.css.map",
+    "main.44e24b6a.js.map": "/open_777/static/js/main.44e24b6a.js.map",
     "289.cb281e76.chunk.js.map": "/open_777/static/js/289.cb281e76.chunk.js.map",
     "453.9595aaab.chunk.js.map": "/open_777/static/js/453.9595aaab.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.c220f38d.css",
-    "static/js/main.0b321115.js"
+    "static/css/main.19a72efc.css",
+    "static/js/main.44e24b6a.js"
   ]
 }
