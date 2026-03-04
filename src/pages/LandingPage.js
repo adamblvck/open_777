@@ -2,6 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import TreeOfLife from '../components/TreeOfLife';
 
+const HERO_IMAGE_URL = 'https://cdn.blvckstudios.com/open777/hero/open777-landing-hero.jpg';
+
 const FEATURES = [
     {
         title: 'Complete Kabbalistic Tables',
@@ -41,9 +43,25 @@ const LandingPage = () => {
     return (
         <div className="min-h-screen bg-[#212638]">
             {/* ===== HERO SECTION ===== */}
-            <section className="relative overflow-hidden py-20 sm:py-28 px-4">
+            <section className="relative overflow-hidden min-h-screen flex items-center justify-center px-4 pt-24 pb-16">
+                {/* Hero image (fills the hero only) */}
+                <div className="absolute inset-0">
+                    <img
+                        src={HERO_IMAGE_URL}
+                        alt=""
+                        aria-hidden="true"
+                        className="h-full w-full object-cover object-[50%_35%]"
+                        loading="eager"
+                        decoding="async"
+                        fetchPriority="high"
+                    />
+                    {/* Purple tint on top + fade into page background at the bottom */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-purple-800/35 via-[#212638]/55 to-[#212638]" />
+                    <div className="absolute inset-0 bg-black/10" />
+                </div>
+
                 {/* Background Tree of Life — large, centered, faded */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-[0.06] pointer-events-none select-none">
+                <div className="absolute inset-0 flex items-center justify-center opacity-[0.05] pointer-events-none select-none mix-blend-soft-light">
                     <TreeOfLife
                         height={700}
                         radiusSephira={28}
@@ -52,16 +70,16 @@ const LandingPage = () => {
                     />
                 </div>
 
-                <div className="relative max-w-4xl mx-auto text-center z-10">
-                    <h1 className="text-5xl sm:text-6xl font-bold text-white font-['philosopher'] tracking-tight mb-6">
-                        Open <span className="text-purple-400">777</span>
+                <div className="relative max-w-4xl mx-auto text-center z-10 w-full">
+                    <h1 className="text-5xl sm:text-6xl font-bold text-white font-['philosopher'] tracking-tight mb-6 drop-shadow-[0_12px_32px_rgba(0,0,0,0.6)]">
+                        Open <span className="text-white">777</span>
                     </h1>
 
-                    <p className="text-xl sm:text-2xl text-gray-300 font-['philosopher'] max-w-2xl mx-auto mb-4 leading-relaxed">
+                    <p className="text-xl sm:text-2xl text-white/90 font-['philosopher'] max-w-2xl mx-auto mb-4 leading-relaxed">
                         The online reference tool for Aleister Crowley's Kabbalistic Correspondences
                     </p>
 
-                    <p className="text-gray-400 max-w-xl mx-auto mb-10 text-base leading-relaxed">
+                    <p className="text-white/75 max-w-xl mx-auto mb-10 text-base leading-relaxed">
                         Explore every column of Liber 777 through interactive tables, filterable card views, 
                         and built-in readings of Liber O and Liber E — all in one place.
                     </p>
