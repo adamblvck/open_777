@@ -4,7 +4,7 @@
   <img width="auto" height="120" src="./docs/docs_logo.png">
 </p>
 
-### 🜁🜂 Visit [Open 777 Here](https://adamblvck.github.io/open_777/) 🜄🜃
+### 🜁🜂 Visit [Open 777 Here](open777.blvckstudios.com/) 🜄🜃
 
 ![](./docs/screenshot_2025.png)
 
