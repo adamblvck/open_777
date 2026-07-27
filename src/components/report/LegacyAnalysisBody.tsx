@@ -1,9 +1,13 @@
 import { useState } from 'react';
-import type { RecordingDetail } from '../../lib/api';
+import type { RecordingDetail } from '../../lib/apiTypes';
 
 const label: React.CSSProperties = { fontSize: 11, letterSpacing: '.24em', textTransform: 'uppercase', color: 'var(--faint)', margin: '18px 0 10px' };
 
-export default function AnalysisView({ detail }: { detail: RecordingDetail }) {
+/**
+ * The pre-vision-report renderer, kept verbatim as the degradation path.
+ * Every recording made before the report pipeline landed renders through here.
+ */
+export default function LegacyAnalysisBody({ detail }: { detail: RecordingDetail }) {
   const analyses = detail.analyses || [];
   const [voiceIdx, setVoiceIdx] = useState(0);
   const a = analyses[voiceIdx];

@@ -11,6 +11,8 @@ const TextsWorkspace = lazy(() => import('./TextsWorkspace'));
 const GlossaryWorkspace = lazy(() => import('./GlossaryWorkspace'));
 const JourneyWorkspace = lazy(() => import('./JourneyWorkspace'));
 const MyRecordsWorkspace = lazy(() => import('./MyRecordsWorkspace'));
+const TreeWorkspace = lazy(() => import('./TreeWorkspace'));
+const SearchWorkspace = lazy(() => import('./SearchWorkspace'));
 
 function Loading() {
   return (
@@ -27,6 +29,18 @@ export default function Workspace() {
       return <ReferenceWorkspace />;
     case 'gematria':
       return <GematriaWorkspace />;
+    case 'tree':
+      return (
+        <Suspense fallback={<Loading />}>
+          <TreeWorkspace />
+        </Suspense>
+      );
+    case 'search':
+      return (
+        <Suspense fallback={<Loading />}>
+          <SearchWorkspace />
+        </Suspense>
+      );
     case 'scrying':
       return <ScryingWorkspace />;
     case 'queque':

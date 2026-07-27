@@ -7,7 +7,8 @@ import Toast from '../components/common/Toast';
 
 export default function Workstation() {
   const mode = useOpen777((s) => s.mode);
-  const fullBleed = mode === 'grid' || mode === 'texts' || mode === 'journey';
+  const fullBleed =
+    mode === 'grid' || mode === 'texts' || mode === 'journey' || mode === 'tree' || mode === 'search';
 
   return (
     <>

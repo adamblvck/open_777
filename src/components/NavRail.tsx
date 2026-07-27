@@ -11,6 +11,8 @@ const NAV: { key: Mode; glyph: string; short: string; label: string }[] = [
   { key: 'grid', glyph: '▦', short: 'Grid', label: 'Full correspondence grid' },
   { key: 'texts', glyph: '☷', short: 'Texts', label: 'Liber texts' },
   { key: 'myrecords', glyph: '⊚', short: 'Mine', label: 'My records (cloud)' },
+  { key: 'tree', glyph: '⯑', short: 'Tree', label: 'Your Tree of Life' },
+  { key: 'search', glyph: '⌕', short: 'Find', label: 'Search your scrying' },
 ];
 
 export default function NavRail() {

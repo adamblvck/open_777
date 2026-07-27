@@ -5,6 +5,18 @@ interface TreeOfLifeProps {
   radiusSephira: number;
   selected?: number[];
   pathwayColor?: string;
+  /** Draw every path faintly, so the glyph reads as a whole map. */
+  showAllPaths?: boolean;
+  /** Per-path stroke colour, keyed by path number (11-32). */
+  pathColors?: Record<number, string>;
+  /** Per-path opacity — used to encode how often a path has been walked. */
+  pathOpacity?: Record<number, number>;
+  /** Per-sephira fill override. */
+  sephiraColors?: Record<number, string>;
+  onSelectPath?: (pathNumber: number) => void;
+  onSelectSephira?: (n: number) => void;
+  /** Tooltip text per path. */
+  pathTitle?: (pathNumber: number) => string;
 }
 
 interface Node {
@@ -13,7 +25,19 @@ interface Node {
   fillColor: string;
 }
 
-const TreeOfLife = ({ height, radiusSephira, selected = [], pathwayColor = '#FFFFFF' }: TreeOfLifeProps) => {
+const TreeOfLife = ({
+  height,
+  radiusSephira,
+  selected = [],
+  pathwayColor = '#FFFFFF',
+  showAllPaths = false,
+  pathColors,
+  pathOpacity,
+  sephiraColors,
+  onSelectPath,
+  onSelectSephira,
+  pathTitle,
+}: TreeOfLifeProps) => {
   // Third of circle radius
   const r_3 = height / 3 / 2;
 
@@ -84,12 +108,33 @@ const TreeOfLife = ({ height, radiusSephira, selected = [], pathwayColor = '#FFF
     return <path d={pathData} fill={color} key={pathData} />;
   };
 
-  const drawPath = (from: number, to: number) => {
+  const drawPath = (pathNumber: number, from: number, to: number) => {
     const x1 = sephirot[from].cx;
     const y1 = sephirot[from].cy;
     const x2 = sephirot[to].cx;
     const y2 = sephirot[to].cy;
-    return <path d={`M ${x1} ${y1} L ${x2} ${y2}`} stroke={pathwayColor} strokeWidth={radiusSephira / 2} key={`path-${from}-${to}`} />;
+    const d = `M ${x1} ${y1} L ${x2} ${y2}`;
+    const stroke = pathColors?.[pathNumber] ?? pathwayColor;
+    const opacity = pathOpacity?.[pathNumber];
+    return (
+      <g key={`path-${pathNumber}`}>
+        <path d={d} stroke={stroke} strokeWidth={radiusSephira / 2} strokeOpacity={opacity} fill="none" />
+        {/* A radiusSephira/2 stroke is far too thin to hit reliably, so every
+            path also carries a wide transparent line for pointer events. */}
+        {onSelectPath || pathTitle ? (
+          <path
+            d={d}
+            stroke="transparent"
+            strokeWidth={Math.max(radiusSephira * 1.8, 10)}
+            fill="none"
+            style={{ cursor: onSelectPath ? 'pointer' : undefined }}
+            onClick={onSelectPath ? () => onSelectPath(pathNumber) : undefined}
+          >
+            {pathTitle ? <title>{pathTitle(pathNumber)}</title> : null}
+          </path>
+        ) : null}
+      </g>
+    );
   };
 
   const getAffectedSephirot = (): Set<number> => {
@@ -111,9 +156,9 @@ const TreeOfLife = ({ height, radiusSephira, selected = [], pathwayColor = '#FFF
   return (
     <svg height={height} width={height} viewBox={`0 0 ${height} ${height}`} className="tree-of-life">
       {/* Paths */}
-      {selected.map((num) => {
+      {(showAllPaths ? Object.keys(pathways).map(Number) : selected).map((num) => {
         if (num > 10 && num <= 32 && pathways[num]) {
-          return drawPath(pathways[num].from, pathways[num].to);
+          return drawPath(num, pathways[num].from, pathways[num].to);
         }
         return null;
       })}
@@ -123,8 +168,21 @@ const TreeOfLife = ({ height, radiusSephira, selected = [], pathwayColor = '#FFF
         const nameNum = parseInt(name);
         const isSelected = affectedSephirot.has(nameNum);
         const stroke = isSelected ? undefined : 'white';
-        const fill = isSelected ? s.fillColor : 'transparent';
-        return <circle cx={s.cx} cy={s.cy} r={radiusSephira} stroke={stroke} strokeWidth="0.5" fill={fill} key={name} />;
+        const override = sephiraColors?.[nameNum];
+        const fill = override ?? (isSelected ? s.fillColor : 'transparent');
+        return (
+          <circle
+            cx={s.cx}
+            cy={s.cy}
+            r={radiusSephira}
+            stroke={stroke}
+            strokeWidth="0.5"
+            fill={fill}
+            key={name}
+            style={{ cursor: onSelectSephira ? 'pointer' : undefined }}
+            onClick={onSelectSephira ? () => onSelectSephira(nameNum) : undefined}
+          />
+        );
       })}
 
       {/* Malkuth elemental slices */}
@@ -132,6 +190,21 @@ const TreeOfLife = ({ height, radiusSephira, selected = [], pathwayColor = '#FFF
         _.map(malkuthElements, (m) => drawSlice([sephirot[10].cx, sephirot[10].cy], m.startAngle, m.endAngle, radiusSephira, m.color))}
     </svg>
   );
+};
+
+/**
+ * Path geometry, exported so callers can derive which paths touch a sephira
+ * without duplicating the table. Path number -> the two sephiroth it joins.
+ */
+export const PATHWAYS: Record<number, { from: number; to: number }> = {
+  11: { from: 1, to: 2 }, 12: { from: 1, to: 3 }, 13: { from: 1, to: 6 },
+  14: { from: 2, to: 3 }, 15: { from: 2, to: 4 }, 16: { from: 2, to: 6 },
+  17: { from: 3, to: 6 }, 18: { from: 3, to: 5 }, 19: { from: 4, to: 5 },
+  20: { from: 4, to: 6 }, 21: { from: 4, to: 7 }, 22: { from: 5, to: 6 },
+  23: { from: 5, to: 8 }, 24: { from: 6, to: 7 }, 25: { from: 6, to: 9 },
+  26: { from: 6, to: 8 }, 27: { from: 7, to: 8 }, 28: { from: 7, to: 9 },
+  29: { from: 7, to: 10 }, 30: { from: 8, to: 9 }, 31: { from: 8, to: 10 },
+  32: { from: 9, to: 10 },
 };
 
 export default TreeOfLife;

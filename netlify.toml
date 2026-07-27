@@ -5,6 +5,9 @@
 [build.environment]
   CI = "false"
   NODE_VERSION = "20"
+  # Without this the build bakes in the http://localhost:3777 fallback from
+  # src/lib/api.ts. Override per-site in the Netlify UI once the API is deployed.
+  VITE_API_BASE_URL = "http://localhost:3777"
 
 [[redirects]]
   from = "/*"

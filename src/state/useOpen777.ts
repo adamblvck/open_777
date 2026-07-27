@@ -18,7 +18,9 @@ export type Mode =
   | 'texts'
   | 'glossary'
   | 'journey'
-  | 'myrecords';
+  | 'myrecords'
+  | 'tree'
+  | 'search';
 
 const GREETING =
   'You have been here before. Ask me anything that lives in your library — a feeling, a name, a thread you keep returning to — and I will gather what resonates.';
@@ -51,6 +53,11 @@ interface State {
   selectedGlossarySlug: string;
   selectedCardColumn: number | null;
   selectedRecordingId: string;
+  /** Path currently focused on the Tree map, or null for none. */
+  treePath: number | null;
+  /** Query carried into the search mode (from a motif chip, a 777 row…). */
+  searchQuery: string;
+  searchScope: string;
   // journey
   journeyScreen: 'map' | 'ritual' | 'witness' | 'hexagram';
   journeyPath: number | null;
@@ -84,6 +91,9 @@ interface State {
   openCard: (column: number) => void;
   setJourneyScreen: (screen: 'map' | 'ritual' | 'witness' | 'hexagram', path?: number | null) => void;
   setSelectedRecording: (id: string) => void;
+  setTreePath: (n: number | null) => void;
+  /** Jump into search with a query already applied. */
+  searchFor: (q: string, scope?: string) => void;
 }
 
 let recTimer: ReturnType<typeof setInterval> | undefined;
@@ -123,6 +133,9 @@ export const useOpen777 = create<State>()(
       selectedGlossarySlug: '',
       selectedCardColumn: null,
       selectedRecordingId: '',
+      treePath: null,
+      searchQuery: '',
+      searchScope: 'all',
       journeyScreen: 'map',
       journeyPath: null,
       toast: '',
@@ -240,6 +253,9 @@ export const useOpen777 = create<State>()(
       setJourneyScreen: (screen, path) =>
         set((s) => ({ journeyScreen: screen, journeyPath: path !== undefined ? path : s.journeyPath })),
       setSelectedRecording: (id) => set({ selectedRecordingId: id }),
+      setTreePath: (n) => set({ treePath: n }),
+      searchFor: (q, scope) =>
+        set({ searchQuery: q, searchScope: scope ?? 'all', mode: 'search' }),
     }),
     {
       name: 'open777_desktop',

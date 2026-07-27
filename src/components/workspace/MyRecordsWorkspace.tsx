@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useOpen777 } from '../../state/useOpen777';
 import { useAuth } from '../../hooks/useAuth';
 import { api, type RecordingDetail } from '../../lib/api';
-import AnalysisView from '../common/AnalysisView';
+import VisionReportView from '../report/VisionReportView';
 
 function Empty({ title, sub }: { title: string; sub: string }) {
   return (
@@ -16,6 +16,7 @@ function Empty({ title, sub }: { title: string; sub: string }) {
 
 export default function MyRecordsWorkspace() {
   const id = useOpen777((s) => s.selectedRecordingId);
+  const searchFor = useOpen777((s) => s.searchFor);
   const setSelected = useOpen777((s) => s.setSelectedRecording);
   const flash = useOpen777((s) => s.flash);
   const { isSignedIn } = useAuth();
@@ -81,7 +82,11 @@ export default function MyRecordsWorkspace() {
           <div style={{ fontSize: 13, color: 'var(--faint)', marginBottom: 18 }}>Audio link unavailable.</div>
         )}
 
-        <AnalysisView detail={detail} />
+        <VisionReportView
+          detail={detail}
+          onMotif={(m) => searchFor(m, 'motifs')}
+          onCorrespondence={(row) => searchFor(row, 'correspondences')}
+        />
       </div>
     </div>
   );

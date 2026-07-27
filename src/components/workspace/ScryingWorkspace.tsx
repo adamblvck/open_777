@@ -6,7 +6,7 @@ import { useWebAudioRecorder, recorderSupported, type RecordResult } from '../..
 import { uploadRecording, pollUntilComplete } from '../../lib/uploadPipeline';
 import { api, ApiError, type RecordingDetail } from '../../lib/api';
 import { useEntitlement } from '../../hooks/useEntitlement';
-import AnalysisView from '../common/AnalysisView';
+import VisionReportView from '../report/VisionReportView';
 import { ritualContent, RITUAL_PREP } from '../../lib/ritualContent';
 
 const WAVE = Array.from({ length: 28 }, (_, i) => Math.round(18 + (Math.sin(i * 1.7) * 0.5 + 0.5) * 22));
@@ -184,7 +184,7 @@ export default function ScryingWorkspace() {
         {cloudDetail ? (
           <div>
             <div style={{ fontSize: 11, letterSpacing: '.26em', textTransform: 'uppercase', color: 'var(--purpledim)', marginBottom: 12 }}>The cloud reading</div>
-            <AnalysisView detail={cloudDetail} />
+            <VisionReportView detail={cloudDetail} />
           </div>
         ) : analysis ? (
           <div style={{ animation: 'o7rise .35s ease both' }}>
