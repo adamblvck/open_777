@@ -1,35 +1,38 @@
+// Glide data-grid theme, retinted to the "Void & Glow" palette.
+// The grid renders to <canvas> and cannot read CSS variables, so the token
+// hex values are inlined here (keep in sync with index.css / theme.ts).
 export const DarkTheme = {
-    accentColor: "#8c96ff",
-    accentLight: "rgba(202, 206, 255, 0.253)",
+    accentColor: "#9d6bff",
+    accentLight: "rgba(157, 107, 255, 0.18)",
 
-    textDark: "#ffffff",
-    textMedium: "#b8b8b8",
-    textLight: "#a0a0a0",
-    textBubble: "#ffffff",
+    textDark: "#f3eee4",
+    textMedium: "#9b95aa",
+    textLight: "#7d7790",
+    textBubble: "#f3eee4",
 
-    bgIconHeader: "#b8b8b8",
-    fgIconHeader: "#000000",
-    textHeader: "#a1a1a1",
-    textHeaderSelected: "#000000",
+    bgIconHeader: "#9b95aa",
+    fgIconHeader: "#0a0810",
+    textHeader: "#7d7790",
+    textHeaderSelected: "#0a0810",
 
-    bgCell: "#16161b",
-    bgCellMedium: "#202027",
-    bgHeader: "#212121",
-    bgHeaderHasFocus: "#474747",
-    bgHeaderHovered: "#404040",
+    bgCell: "#161420",
+    bgCellMedium: "#1b1827",
+    bgHeader: "#16141c",
+    bgHeaderHasFocus: "#211e2b",
+    bgHeaderHovered: "#211e2b",
 
-    bgBubble: "#212121",
-    bgBubbleSelected: "#000000",
+    bgBubble: "#1b1827",
+    bgBubbleSelected: "#0a0810",
 
-    bgSearchResult: "#423c24",
+    bgSearchResult: "#2a1f3a",
 
-    borderColor: "rgba(225,225,225,0.2)",
-    drilldownBorder: "rgba(225,225,225,0.4)",
+    borderColor: "rgba(157,107,255,0.14)",
+    drilldownBorder: "rgba(157,107,255,0.4)",
 
-    linkColor: "#4F5DFF",
+    linkColor: "#9d6bff",
 
-    headerFontStyle: "bold 14px",
+    headerFontStyle: "600 14px",
     baseFontStyle: "13px",
     fontFamily:
-        "Inter, Roboto, -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, noto, arial, sans-serif",
+        "Prompt, Inter, -apple-system, BlinkMacSystemFont, segoe ui, helvetica neue, helvetica, Ubuntu, noto, arial, sans-serif",
 };

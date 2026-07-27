@@ -1,9 +1,10 @@
 [build]
-  command = "PUBLIC_URL=/ npm run build"
-  publish = "build"
+  command = "npm run build"
+  publish = "dist"
 
 [build.environment]
   CI = "false"
+  NODE_VERSION = "20"
 
 [[redirects]]
   from = "/*"

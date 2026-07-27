@@ -1,0 +1,1078 @@
+{
+ "_meta": {
+  "title": "Liber 777 Expansion — Visual Companionship Classification",
+  "generated": "2026-05-24",
+  "scale": "visualValue 3=excellent, 2=good, 1=low/diagram-only"
+ },
+ "byType": [
+  {
+   "type": "deity-egyptian",
+   "termCount": 147,
+   "visualValue": 3,
+   "note": "Deity portrait/icon. Egyptian gods are the most visually iconic pantheon."
+  },
+  {
+   "type": "tarot-trump",
+   "termCount": 116,
+   "visualValue": 3,
+   "note": "Tarot card art (Thoth deck homage). 22 trumps — the crown jewels for visuals."
+  },
+  {
+   "type": "magical-image",
+   "termCount": 115,
+   "visualValue": 3,
+   "note": "The Sephiroth/decan 'magical images' are literally descriptions of pictures."
+  },
+  {
+   "type": "animal",
+   "termCount": 88,
+   "visualValue": 3,
+   "note": "Animal illustration incl. mythic beasts (sphinx, unicorn). ~88, evocative."
+  },
+  {
+   "type": "zodiac",
+   "termCount": 79,
+   "visualValue": 3,
+   "note": "Zodiacal glyph + sign art. 12, universal, reusable."
+  },
+  {
+   "type": "plant",
+   "termCount": 79,
+   "visualValue": 3,
+   "note": "Botanical illustration or photo. Finite (~87), beautiful, well-documented."
+  },
+  {
+   "type": "perfume",
+   "termCount": 75,
+   "visualValue": 3,
+   "note": "Resin/herb/incense imagery. ~77; pairs naturally with plants."
+  },
+  {
+   "type": "weapon",
+   "termCount": 73,
+   "visualValue": 3,
+   "note": "Ceremonial implement illustration (wand, cup, sword, disk). ~73, iconic."
+  },
+  {
+   "type": "deity-hindu",
+   "termCount": 71,
+   "visualValue": 3,
+   "note": "Deity icon. Rich, colourful, highly iconographic tradition."
+  },
+  {
+   "type": "planet",
+   "termCount": 59,
+   "visualValue": 3,
+   "note": "Astrological glyph + symbolic art. Universal, reusable across tables."
+  },
+  {
+   "type": "gemstone",
+   "termCount": 39,
+   "visualValue": 3,
+   "note": "Photoreal stone / mineral specimen. Finite (~38), iconic, high payoff."
+  },
+  {
+   "type": "sephira",
+   "termCount": 37,
+   "visualValue": 3,
+   "note": "Diagrammatic + symbolic (Tree-of-Life node, magical image). Core 10+."
+  },
+  {
+   "type": "deity-greek",
+   "termCount": 36,
+   "visualValue": 3,
+   "note": "Deity portrait/icon. Classical art reference is abundant."
+  },
+  {
+   "type": "element",
+   "termCount": 36,
+   "visualValue": 3,
+   "note": "Elemental glyph / Tatwa form. 5, foundational, reusable."
+  },
+  {
+   "type": "tarot-court",
+   "termCount": 28,
+   "visualValue": 3,
+   "note": "Court-card art. 16 cards, finite and iconic."
+  },
+  {
+   "type": "deity-roman",
+   "termCount": 23,
+   "visualValue": 3,
+   "note": "Deity portrait/icon. Parallels Greek; classical statuary."
+  },
+  {
+   "type": "metal",
+   "termCount": 10,
+   "visualValue": 3,
+   "note": "Material/metal swatch or alchemical glyph. Tiny set (~15), easy wins."
+  },
+  {
+   "type": "deity-norse",
+   "termCount": 8,
+   "visualValue": 3,
+   "note": "Deity icon. Small, evocative set (~8)."
+  },
+  {
+   "type": "deity-buddhist",
+   "termCount": 105,
+   "visualValue": 2,
+   "note": "Meditative/iconographic imagery; some are abstract states."
+  },
+  {
+   "type": "tarot-suit",
+   "termCount": 58,
+   "visualValue": 2,
+   "note": "Minor-arcana / decan card art. Larger but visually coherent."
+  },
+  {
+   "type": "letter",
+   "termCount": 42,
+   "visualValue": 2,
+   "note": "Hebrew/Greek/Coptic/Arabic glyph — typographic, finite, decorative."
+  },
+  {
+   "type": "demon",
+   "termCount": 37,
+   "visualValue": 2,
+   "note": "Goetic seals / demon imagery; powerful but use editorial caution."
+  },
+  {
+   "type": "deity-christian",
+   "termCount": 29,
+   "visualValue": 2,
+   "note": "Saints/apostles/evangelists — established iconography."
+  },
+  {
+   "type": "deity-tao",
+   "termCount": 13,
+   "visualValue": 2,
+   "note": "Immortals / trigrams; iconography available but niche."
+  },
+  {
+   "type": "alchemy",
+   "termCount": 4,
+   "visualValue": 2,
+   "note": "Alchemical glyphs — decorative, finite."
+  },
+  {
+   "type": "concept",
+   "termCount": 318,
+   "visualValue": 1,
+   "note": "Mixed bag — case by case."
+  },
+  {
+   "type": "angel",
+   "termCount": 135,
+   "visualValue": 1,
+   "note": "Mostly long transliterated names; individual portraits impractical at scale."
+  },
+  {
+   "type": "soul-part",
+   "termCount": 118,
+   "visualValue": 1,
+   "note": "Abstract concepts (parts of the soul, body) — diagram/symbol only."
+  },
+  {
+   "type": "magical-power",
+   "termCount": 99,
+   "visualValue": 1,
+   "note": "Abstract attainments — iconography is interpretive."
+  },
+  {
+   "type": "world",
+   "termCount": 93,
+   "visualValue": 1,
+   "note": "Cosmological/abstract (heavens, palaces, hells) — diagram over portrait."
+  },
+  {
+   "type": "path-meaning",
+   "termCount": 56,
+   "visualValue": 1,
+   "note": "Textual/conceptual — no natural single image."
+  },
+  {
+   "type": "drug",
+   "termCount": 49,
+   "visualValue": 1,
+   "note": ""
+  },
+  {
+   "type": "grade",
+   "termCount": 33,
+   "visualValue": 1,
+   "note": "Organisational/initiatory — sigils or diagrams at most."
+  },
+  {
+   "type": "god-name",
+   "termCount": 1,
+   "visualValue": 1,
+   "note": "Names of power (Hebrew) — better as calligraphy than illustration."
+  }
+ ],
+ "tiers": {
+  "tier1_excellent": [
+   {
+    "type": "deity-egyptian",
+    "termCount": 147,
+    "visualValue": 3,
+    "note": "Deity portrait/icon. Egyptian gods are the most visually iconic pantheon."
+   },
+   {
+    "type": "tarot-trump",
+    "termCount": 116,
+    "visualValue": 3,
+    "note": "Tarot card art (Thoth deck homage). 22 trumps — the crown jewels for visuals."
+   },
+   {
+    "type": "magical-image",
+    "termCount": 115,
+    "visualValue": 3,
+    "note": "The Sephiroth/decan 'magical images' are literally descriptions of pictures."
+   },
+   {
+    "type": "animal",
+    "termCount": 88,
+    "visualValue": 3,
+    "note": "Animal illustration incl. mythic beasts (sphinx, unicorn). ~88, evocative."
+   },
+   {
+    "type": "zodiac",
+    "termCount": 79,
+    "visualValue": 3,
+    "note": "Zodiacal glyph + sign art. 12, universal, reusable."
+   },
+   {
+    "type": "plant",
+    "termCount": 79,
+    "visualValue": 3,
+    "note": "Botanical illustration or photo. Finite (~87), beautiful, well-documented."
+   },
+   {
+    "type": "perfume",
+    "termCount": 75,
+    "visualValue": 3,
+    "note": "Resin/herb/incense imagery. ~77; pairs naturally with plants."
+   },
+   {
+    "type": "weapon",
+    "termCount": 73,
+    "visualValue": 3,
+    "note": "Ceremonial implement illustration (wand, cup, sword, disk). ~73, iconic."
+   },
+   {
+    "type": "deity-hindu",
+    "termCount": 71,
+    "visualValue": 3,
+    "note": "Deity icon. Rich, colourful, highly iconographic tradition."
+   },
+   {
+    "type": "planet",
+    "termCount": 59,
+    "visualValue": 3,
+    "note": "Astrological glyph + symbolic art. Universal, reusable across tables."
+   },
+   {
+    "type": "gemstone",
+    "termCount": 39,
+    "visualValue": 3,
+    "note": "Photoreal stone / mineral specimen. Finite (~38), iconic, high payoff."
+   },
+   {
+    "type": "sephira",
+    "termCount": 37,
+    "visualValue": 3,
+    "note": "Diagrammatic + symbolic (Tree-of-Life node, magical image). Core 10+."
+   },
+   {
+    "type": "deity-greek",
+    "termCount": 36,
+    "visualValue": 3,
+    "note": "Deity portrait/icon. Classical art reference is abundant."
+   },
+   {
+    "type": "element",
+    "termCount": 36,
+    "visualValue": 3,
+    "note": "Elemental glyph / Tatwa form. 5, foundational, reusable."
+   },
+   {
+    "type": "tarot-court",
+    "termCount": 28,
+    "visualValue": 3,
+    "note": "Court-card art. 16 cards, finite and iconic."
+   },
+   {
+    "type": "deity-roman",
+    "termCount": 23,
+    "visualValue": 3,
+    "note": "Deity portrait/icon. Parallels Greek; classical statuary."
+   },
+   {
+    "type": "metal",
+    "termCount": 10,
+    "visualValue": 3,
+    "note": "Material/metal swatch or alchemical glyph. Tiny set (~15), easy wins."
+   },
+   {
+    "type": "deity-norse",
+    "termCount": 8,
+    "visualValue": 3,
+    "note": "Deity icon. Small, evocative set (~8)."
+   }
+  ],
+  "tier2_good": [
+   {
+    "type": "deity-buddhist",
+    "termCount": 105,
+    "visualValue": 2,
+    "note": "Meditative/iconographic imagery; some are abstract states."
+   },
+   {
+    "type": "tarot-suit",
+    "termCount": 58,
+    "visualValue": 2,
+    "note": "Minor-arcana / decan card art. Larger but visually coherent."
+   },
+   {
+    "type": "letter",
+    "termCount": 42,
+    "visualValue": 2,
+    "note": "Hebrew/Greek/Coptic/Arabic glyph — typographic, finite, decorative."
+   },
+   {
+    "type": "demon",
+    "termCount": 37,
+    "visualValue": 2,
+    "note": "Goetic seals / demon imagery; powerful but use editorial caution."
+   },
+   {
+    "type": "deity-christian",
+    "termCount": 29,
+    "visualValue": 2,
+    "note": "Saints/apostles/evangelists — established iconography."
+   },
+   {
+    "type": "deity-tao",
+    "termCount": 13,
+    "visualValue": 2,
+    "note": "Immortals / trigrams; iconography available but niche."
+   },
+   {
+    "type": "alchemy",
+    "termCount": 4,
+    "visualValue": 2,
+    "note": "Alchemical glyphs — decorative, finite."
+   }
+  ],
+  "tier3_low": [
+   {
+    "type": "concept",
+    "termCount": 318,
+    "visualValue": 1,
+    "note": "Mixed bag — case by case."
+   },
+   {
+    "type": "angel",
+    "termCount": 135,
+    "visualValue": 1,
+    "note": "Mostly long transliterated names; individual portraits impractical at scale."
+   },
+   {
+    "type": "soul-part",
+    "termCount": 118,
+    "visualValue": 1,
+    "note": "Abstract concepts (parts of the soul, body) — diagram/symbol only."
+   },
+   {
+    "type": "magical-power",
+    "termCount": 99,
+    "visualValue": 1,
+    "note": "Abstract attainments — iconography is interpretive."
+   },
+   {
+    "type": "world",
+    "termCount": 93,
+    "visualValue": 1,
+    "note": "Cosmological/abstract (heavens, palaces, hells) — diagram over portrait."
+   },
+   {
+    "type": "path-meaning",
+    "termCount": 56,
+    "visualValue": 1,
+    "note": "Textual/conceptual — no natural single image."
+   },
+   {
+    "type": "drug",
+    "termCount": 49,
+    "visualValue": 1,
+    "note": ""
+   },
+   {
+    "type": "grade",
+    "termCount": 33,
+    "visualValue": 1,
+    "note": "Organisational/initiatory — sigils or diagrams at most."
+   },
+   {
+    "type": "god-name",
+    "termCount": 1,
+    "visualValue": 1,
+    "note": "Names of power (Hebrew) — better as calligraphy than illustration."
+   }
+  ]
+ },
+ "recommendedTablesToIllustrate": [
+  {
+   "row": 12,
+   "table": "IX",
+   "label": "IX. The Sword and the Serpent",
+   "type": "sephira",
+   "visualValue": 3
+  },
+  {
+   "row": 14,
+   "table": "XI",
+   "label": "XI. The Elements and their Planetary Rulers",
+   "type": "planet",
+   "visualValue": 3
+  },
+  {
+   "row": 15,
+   "table": "XII",
+   "label": "XII. Position on the Glyph of the Tree of Life",
+   "type": "sephira",
+   "visualValue": 3
+  },
+  {
+   "row": 17,
+   "table": "XIV",
+   "label": "XIV. General Attribution of the Tarot",
+   "type": "tarot-trump",
+   "visualValue": 3
+  },
+  {
+   "row": 26,
+   "table": "XIX",
+   "label": "XIX. Selection of Egyptian Gods",
+   "type": "deity-egyptian",
+   "visualValue": 3
+  },
+  {
+   "row": 27,
+   "table": "XX",
+   "label": "XX. Practical Egyptian Gods",
+   "type": "deity-egyptian",
+   "visualValue": 3
+  },
+  {
+   "row": 28,
+   "table": "XXI",
+   "label": "XXI. The Perfected Man",
+   "type": "deity-hindu",
+   "visualValue": 3
+  },
+  {
+   "row": 29,
+   "table": "XXII",
+   "label": "XXII. Small Selection of Hindu Deities",
+   "type": "deity-hindu",
+   "visualValue": 3
+  },
+  {
+   "row": 33,
+   "table": "XXXIII",
+   "label": "XXXIII. Some Scandinavian Gods",
+   "type": "deity-norse",
+   "visualValue": 3
+  },
+  {
+   "row": 34,
+   "table": "XXXIV",
+   "label": "XXXIV. Some Greek Gods",
+   "type": "deity-greek",
+   "visualValue": 3
+  },
+  {
+   "row": 35,
+   "table": "XXXV",
+   "label": "XXXV. Some Roman Gods",
+   "type": "deity-roman",
+   "visualValue": 3
+  },
+  {
+   "row": 37,
+   "table": "XXXVII",
+   "label": "XXXVII. Hindu Legendary Demons",
+   "type": "deity-hindu",
+   "visualValue": 3
+  },
+  {
+   "row": 38,
+   "table": "XXXVIII",
+   "label": "XXXVIII. Animals (Real & Imaginary)",
+   "type": "animal",
+   "visualValue": 3
+  },
+  {
+   "row": 39,
+   "table": "XXXIX",
+   "label": "XXXIX. Plants (Real & Imaginary)",
+   "type": "plant",
+   "visualValue": 3
+  },
+  {
+   "row": 40,
+   "table": "XL",
+   "label": "XL. Precious Stones",
+   "type": "gemstone",
+   "visualValue": 3
+  },
+  {
+   "row": 41,
+   "table": "XLI",
+   "label": "XLI. Magical Weapons",
+   "type": "weapon",
+   "visualValue": 3
+  },
+  {
+   "row": 43,
+   "table": "XLII",
+   "label": "XLII. Perfumes",
+   "type": "perfume",
+   "visualValue": 3
+  },
+  {
+   "row": 50,
+   "table": "XLIX",
+   "label": "XLIX. Lineal Figures of the Planets, &c., and Geomany",
+   "type": "planet",
+   "visualValue": 3
+  },
+  {
+   "row": 65,
+   "table": "LV",
+   "label": "LV. The Elements and Senses",
+   "type": "element",
+   "visualValue": 3
+  },
+  {
+   "row": 66,
+   "table": "LVI",
+   "label": "LVI. The Four Rivers",
+   "type": "element",
+   "visualValue": 3
+  },
+  {
+   "row": 67,
+   "table": "LVI",
+   "label": "LVI. The Four Rivers (English)",
+   "type": "element",
+   "visualValue": 3
+  },
+  {
+   "row": 68,
+   "table": "LVII",
+   "label": "LVII. The Four Quarters",
+   "type": "element",
+   "visualValue": 3
+  },
+  {
+   "row": 70,
+   "table": "LVII",
+   "label": "LVII. The Four Quarters Direction",
+   "type": "element",
+   "visualValue": 3
+  },
+  {
+   "row": 78,
+   "table": "LXII",
+   "label": "LXII. Kings of the Elemental Spirits",
+   "type": "element",
+   "visualValue": 3
+  },
+  {
+   "row": 90,
+   "table": "LXX",
+   "label": "LXX. Attribution of the Pentagram",
+   "type": "element",
+   "visualValue": 3
+  },
+  {
+   "row": 91,
+   "table": "LXXI",
+   "label": "LXXI. Court Cards of the Tarot, with the Spheres of their Celestial Dominion - Wands",
+   "type": "tarot-court",
+   "visualValue": 3
+  },
+  {
+   "row": 92,
+   "table": "LXII",
+   "label": "LXII. The Court Cards of the Tarot, with the Spheres of their Celestial Dominion Cups",
+   "type": "tarot-court",
+   "visualValue": 3
+  },
+  {
+   "row": 93,
+   "table": "LXIII",
+   "label": "LXIII. The Court Cards of the Tarot, with the Spheres of their Celestial Dominion Swords.",
+   "type": "tarot-court",
+   "visualValue": 3
+  },
+  {
+   "row": 94,
+   "table": "LXIV",
+   "label": "LXIV. The Court Cards of the Tarot, with the Spheres of \r\ntheir Celestial Dominion Pantacles.",
+   "type": "tarot-court",
+   "visualValue": 3
+  },
+  {
+   "row": 95,
+   "table": "LXXV",
+   "label": "LXXV. The Five Elements (Tatwas)",
+   "type": "element",
+   "visualValue": 3
+  },
+  {
+   "row": 96,
+   "table": "LXXV",
+   "label": "LXXV. Descriptions of the Tatwas",
+   "type": "element",
+   "visualValue": 3
+  },
+  {
+   "row": 103,
+   "table": "LXXVII",
+   "label": "LXXVII. The Planets",
+   "type": "planet",
+   "visualValue": 3
+  },
+  {
+   "row": 107,
+   "table": "LXXIX",
+   "label": "LXXIX. Spirits of the Planets",
+   "type": "planet",
+   "visualValue": 3
+  },
+  {
+   "row": 110,
+   "table": "LXXXI",
+   "label": "LXXXI. Metals",
+   "type": "metal",
+   "visualValue": 3
+  },
+  {
+   "row": 141,
+   "table": "CIII",
+   "label": "CIII. The Ten Divisions of the Body of God",
+   "type": "sephira",
+   "visualValue": 3
+  },
+  {
+   "row": 154,
+   "table": "CX",
+   "label": "CX. Elements and Quarters per the Sepher Yetzirah",
+   "type": "element",
+   "visualValue": 3
+  },
+  {
+   "row": 158,
+   "table": "CXIII",
+   "label": "CXIII. Alechemical Metals",
+   "type": "metal",
+   "visualValue": 3
+  },
+  {
+   "row": 167,
+   "table": "CXX",
+   "label": "CXX. Magical Images of the Sephiroth",
+   "type": "magical-image",
+   "visualValue": 3
+  },
+  {
+   "row": 185,
+   "table": "CXXXVII",
+   "label": "CXXXVII. Signs of the Zodiac",
+   "type": "zodiac",
+   "visualValue": 3
+  },
+  {
+   "row": 186,
+   "table": "CXXXVII",
+   "label": "CXXXVII. Signs of the Zodiac .1",
+   "type": "zodiac",
+   "visualValue": 3
+  },
+  {
+   "row": 187,
+   "table": "CXXXVIII",
+   "label": "CXXXVIII. Planets Governing the Signs of the Zodiac",
+   "type": "planet",
+   "visualValue": 3
+  },
+  {
+   "row": 188,
+   "table": "CXXXIX",
+   "label": "CXXXIX. Planets Exalted in the Signs of the Zodiac",
+   "type": "planet",
+   "visualValue": 3
+  },
+  {
+   "row": 189,
+   "table": "",
+   "label": "Superior Planetary Governors",
+   "type": "planet",
+   "visualValue": 3
+  },
+  {
+   "row": 190,
+   "table": "",
+   "label": "Superior Planetary Governors.1",
+   "type": "planet",
+   "visualValue": 3
+  },
+  {
+   "row": 208,
+   "table": "CXLIX",
+   "label": "CXLIX. Magical Images of the Decans (Ascendent)",
+   "type": "magical-image",
+   "visualValue": 3
+  },
+  {
+   "row": 209,
+   "table": "CL",
+   "label": "CL. Magical Images of the Decans (Succedent)",
+   "type": "magical-image",
+   "visualValue": 3
+  },
+  {
+   "row": 210,
+   "table": "CLI",
+   "label": "CLI. Magical Images of the Decans (Cadent)",
+   "type": "magical-image",
+   "visualValue": 3
+  },
+  {
+   "row": 211,
+   "table": "CLII",
+   "label": "CLII. Perfumes (Ascendent)",
+   "type": "perfume",
+   "visualValue": 3
+  },
+  {
+   "row": 212,
+   "table": "CLIII",
+   "label": "CLIII. Perfumes (Succedent)",
+   "type": "perfume",
+   "visualValue": 3
+  },
+  {
+   "row": 213,
+   "table": "CLIV",
+   "label": "CLIV. Perfumes (Cadent)",
+   "type": "perfume",
+   "visualValue": 3
+  },
+  {
+   "row": 244,
+   "table": "CLXVII",
+   "label": "CLXVII. Egyptian Gods of the Zodiac (Asc. Decans)",
+   "type": "deity-egyptian",
+   "visualValue": 3
+  },
+  {
+   "row": 245,
+   "table": "CLXVIII",
+   "label": "CLXVIII. Egyptian Names of Asc. Decans.",
+   "type": "deity-egyptian",
+   "visualValue": 3
+  },
+  {
+   "row": 246,
+   "table": "CLXIX",
+   "label": "CLXIX. Egyptian Gods of the Zodiac (Succedent)",
+   "type": "deity-egyptian",
+   "visualValue": 3
+  },
+  {
+   "row": 247,
+   "table": "CLXX",
+   "label": "CLXX. Egyptian Names of the Succedent Decans",
+   "type": "deity-egyptian",
+   "visualValue": 3
+  },
+  {
+   "row": 248,
+   "table": "CLXXI",
+   "label": "CLXXI. Egyptian Gods of the Zodiac (Cadent)",
+   "type": "deity-egyptian",
+   "visualValue": 3
+  },
+  {
+   "row": 249,
+   "table": "CLXXII",
+   "label": "CLXXII. Egyptian Names of the Cadent Decans",
+   "type": "deity-egyptian",
+   "visualValue": 3
+  },
+  {
+   "row": 251,
+   "table": "CLXXIV",
+   "label": "CLXXIV. The Mansions of the Moon",
+   "type": "zodiac",
+   "visualValue": 3
+  },
+  {
+   "row": 257,
+   "table": "CLXXIX",
+   "label": "CLXXIX. Numbers printed on Tarot Trumps",
+   "type": "tarot-trump",
+   "visualValue": 3
+  },
+  {
+   "row": 258,
+   "table": "CLXXX",
+   "label": "CLXXX. Title of Tarot Trumps",
+   "type": "tarot-trump",
+   "visualValue": 3
+  },
+  {
+   "row": 259,
+   "table": "CLXXXI",
+   "label": "CLXXXI. Correct Design of Tarot Trumps",
+   "type": "tarot-trump",
+   "visualValue": 3
+  },
+  {
+   "row": 11,
+   "table": "CXXIII",
+   "label": "CXXIII. Translation of the Orders of the Qliphoth",
+   "type": "demon",
+   "visualValue": 2
+  },
+  {
+   "row": 30,
+   "table": "XXIII",
+   "label": "XXIII. The Forty Buddhist Meditations",
+   "type": "deity-buddhist",
+   "visualValue": 2
+  },
+  {
+   "row": 31,
+   "table": "XXIV",
+   "label": "XXIV. Certain of the Hindu/Buddhist Results",
+   "type": "deity-buddhist",
+   "visualValue": 2
+  },
+  {
+   "row": 36,
+   "table": "XXXVI",
+   "label": "XXXVI. Selection of Christian Gods (10); Apostles (12); Evangelists(4); and Churches of Asia (7)",
+   "type": "deity-christian",
+   "visualValue": 2
+  },
+  {
+   "row": 47,
+   "table": "XLVI",
+   "label": "XLVI. System of Taoism",
+   "type": "deity-tao",
+   "visualValue": 2
+  },
+  {
+   "row": 54,
+   "table": "LI",
+   "label": "LI. Names of the Coptic Letters",
+   "type": "letter",
+   "visualValue": 2
+  },
+  {
+   "row": 56,
+   "table": "LI",
+   "label": "LI. English Equivalent of the Coptic Alphabet",
+   "type": "letter",
+   "visualValue": 2
+  },
+  {
+   "row": 88,
+   "table": "LXVIII",
+   "label": "LXVIII. The Demon Kings",
+   "type": "demon",
+   "visualValue": 2
+  },
+  {
+   "row": 89,
+   "table": "LXIX",
+   "label": "LXIX. The Alchemical Elements",
+   "type": "alchemy",
+   "visualValue": 2
+  },
+  {
+   "row": 97,
+   "table": "LXXVI",
+   "label": "LXXVI. The Five Skandhas",
+   "type": "deity-buddhist",
+   "visualValue": 2
+  },
+  {
+   "row": 98,
+   "table": "LXXVI",
+   "label": "LXXVI. The Five Skandhas (English)",
+   "type": "deity-buddhist",
+   "visualValue": 2
+  },
+  {
+   "row": 100,
+   "table": "CXCI",
+   "label": "CXCI. The Four Noble Truths",
+   "type": "deity-buddhist",
+   "visualValue": 2
+  },
+  {
+   "row": 111,
+   "table": "LXXXII",
+   "label": "LXXXII. The Noble Eightfold Path",
+   "type": "deity-buddhist",
+   "visualValue": 2
+  },
+  {
+   "row": 112,
+   "table": "CXCII",
+   "label": "CXCII. The Noble Eightfold Path (English)",
+   "type": "deity-buddhist",
+   "visualValue": 2
+  },
+  {
+   "row": 148,
+   "table": "CVIII",
+   "label": "CVIII. Some Princes of the Qliphoth",
+   "type": "demon",
+   "visualValue": 2
+  },
+  {
+   "row": 150,
+   "table": "CIX",
+   "label": "CIX. Kings of Edom",
+   "type": "demon",
+   "visualValue": 2
+  },
+  {
+   "row": 152,
+   "table": "CIX",
+   "label": "CIX. Dukes of Edom",
+   "type": "demon",
+   "visualValue": 2
+  },
+  {
+   "row": 156,
+   "table": "CXII",
+   "label": "CXII. Alchemical Tree of Life",
+   "type": "alchemy",
+   "visualValue": 2
+  },
+  {
+   "row": 157,
+   "table": "CXII",
+   "label": "CXII. Alchemical Tree of Life.1",
+   "type": "alchemy",
+   "visualValue": 2
+  },
+  {
+   "row": 165,
+   "table": "CXIX",
+   "label": "CXIX. The Ten Fetters (Buddhism)",
+   "type": "deity-buddhist",
+   "visualValue": 2
+  },
+  {
+   "row": 166,
+   "table": "CXIX",
+   "label": "CXIX. The Ten Fetters (English)",
+   "type": "deity-buddhist",
+   "visualValue": 2
+  },
+  {
+   "row": 174,
+   "table": "CXXVI",
+   "label": "CXXVI. Inhabitants of the Seven Hells of the Arabs",
+   "type": "demon",
+   "visualValue": 2
+  },
+  {
+   "row": 181,
+   "table": "CXXXIII",
+   "label": "CXXXIII. Titles and Attributions of the Wand Suit",
+   "type": "tarot-suit",
+   "visualValue": 2
+  },
+  {
+   "row": 182,
+   "table": "CXXXIV",
+   "label": "CXXXIV. Titles and Attributions of the Chalice Suit",
+   "type": "tarot-suit",
+   "visualValue": 2
+  },
+  {
+   "row": 183,
+   "table": "CXXXV",
+   "label": "CXXXV. Titles and Attributions of the Sword Suit.",
+   "type": "tarot-suit",
+   "visualValue": 2
+  },
+  {
+   "row": 184,
+   "table": "CXXXVI",
+   "label": "CXXXVI. Titles and Attributions of the Pantacle Suit",
+   "type": "tarot-suit",
+   "visualValue": 2
+  },
+  {
+   "row": 214,
+   "table": "CLV",
+   "label": "CLV. Goetic Demons of Decans by Day (Ascendant)",
+   "type": "demon",
+   "visualValue": 2
+  },
+  {
+   "row": 219,
+   "table": "CLVII",
+   "label": "CLVII. Goetic Demons of the Decans by Day (Succedent)",
+   "type": "demon",
+   "visualValue": 2
+  },
+  {
+   "row": 224,
+   "table": "CLIX",
+   "label": "CLIX. Goetic Demons of the Decans by Day (Cadent)",
+   "type": "demon",
+   "visualValue": 2
+  },
+  {
+   "row": 229,
+   "table": "CLXI",
+   "label": "CLXI. Goetic Demons of the Decans by Night (Ascendant)",
+   "type": "demon",
+   "visualValue": 2
+  },
+  {
+   "row": 234,
+   "table": "CLXIII",
+   "label": "CLXIII. Goetic Demons of the Decans by Night (Succedent)",
+   "type": "demon",
+   "visualValue": 2
+  },
+  {
+   "row": 239,
+   "table": "CLXV",
+   "label": "CLXV. Goetic Demons of the Decans by Night (Cadent)",
+   "type": "demon",
+   "visualValue": 2
+  },
+  {
+   "row": 254,
+   "table": "CLXXVII",
+   "label": "CLXXVII. Hebrew Letters Yetziratic Attribution",
+   "type": "letter",
+   "visualValue": 2
+  }
+ ]
+}

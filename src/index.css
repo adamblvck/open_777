@@ -1,3 +1,96 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ============================================================
+   OPEN 777 · "Void & Glow" design tokens
+   Single source of truth for the desktop workstation + landing.
+   Mirrored (typed) in src/theme.ts — keep the two in lockstep.
+   ============================================================ */
+:root {
+  --void2:    #0b0a0f; /* app background (deepest) */
+  --void:     #16141c; /* browse column background */
+  --panel:    #0c0b11; /* inputs, search field, textarea surface */
+  --card:     #161420; /* card / metric / recorder surface */
+  --card2:    #1b1827; /* secondary card (stat tiles, toast) */
+  --line:     #211e2b; /* hairline border / divider (primary) */
+  --line2:    #2a2733; /* hairline border (lighter, chips/insets) */
+  --purple:   #9d6bff; /* primary accent (active, links, glow, CTAs) */
+  --purpledim:#6e5aa6; /* dimmed accent (kickers, counts) */
+  --cream:    #f3eee4; /* primary text (warm cream) */
+  --muted:    #9b95aa; /* secondary text */
+  --dim:      #7d7790; /* tertiary text, subtitles */
+  --faint:    #605b6e; /* captions, placeholders, inactive */
+  --panel2:   #100e17; /* "your interpretation" / analysis pane bg */
+  --navbg:    #0a0810; /* nav rail bg + glyph badge insets + CTA text */
+  --purple2:  #c9b6ff; /* accent-soft (on-violet text, big numerals, glyphs) */
+  --danger:   #e0464b; /* destructive / fire accent */
+  --info-ring: #4a4458; /* ⓘ glossary affordance ring (inactive) */
+  --info-text: #8a849a; /* ⓘ glossary affordance "i" (inactive) */
+
+  --serif:  'Cormorant Garamond', Georgia, serif; /* display: titles, names, numerals */
+  --serif2: 'EB Garamond', Georgia, serif;        /* italic body / Hebrew / Greek */
+  --ui:     'Prompt', system-ui, sans-serif;      /* all UI chrome */
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; background: var(--void2); }
+
+body {
+  font-family: var(--ui);
+  color: var(--cream);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Root wrapper applied to the new surfaces (landing + workstation). */
+.o7-root {
+  background: var(--void2);
+  color: var(--cream);
+  font-family: var(--ui);
+  scrollbar-color: #272430 transparent;
+  scrollbar-width: thin;
+}
+
+textarea, input, button, select { font-family: var(--ui); }
+
+/* Custom 9px scrollbar (matches the prototype). */
+::-webkit-scrollbar { width: 9px; height: 9px; }
+::-webkit-scrollbar-thumb { background: #272430; border-radius: 9px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+/* ---- desktop-only gate for the /app workstation ---- */
+.o7-small-screen-notice { display: none; }
+@media (max-width: 1099px) {
+  .o7-workstation { display: none !important; }
+  .o7-small-screen-notice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 16px;
+    min-height: 100vh;
+    padding: 40px;
+  }
+}
+
+/* ---- decorative keyframes (gated on prefers-reduced-motion below) ---- */
+@keyframes o7glow     { 0%,100% { opacity:.6; filter:blur(.5px); } 50% { opacity:1; filter:blur(0); } }
+@keyframes o7rainbow  { 0% { background-position:0% 50%; } 100% { background-position:200% 50%; } }
+@keyframes o7recpulse { 0%,100% { box-shadow:0 0 0 0 rgba(224,70,75,.55); } 50% { box-shadow:0 0 0 9px rgba(224,70,75,0); } }
+@keyframes o7wave     { 0%,100% { transform:scaleY(.28); } 50% { transform:scaleY(1); } }
+@keyframes o7rise     { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+@keyframes o7spin     { from { transform:rotate(0); } to { transform:rotate(360deg); } }
+@keyframes o7float    { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-10px); } }
+@keyframes o7hexdraw  { to { stroke-dashoffset: 0; } }
+
+/* Accessibility: neutralise looping motion for users who ask for it. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
