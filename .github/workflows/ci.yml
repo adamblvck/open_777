@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20" # matches .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      # There are no tests in this repo yet, so the build IS the test: it is the
+      # only thing that catches a broken import or a bad JSX edit before Netlify
+      # does. VITE_API_BASE_URL is deliberately a dummy — this only proves the
+      # bundle compiles, and baking a real URL here would be the same mistake
+      # netlify.toml made.
+      - name: Build
+        run: npm run build
+        env:
+          VITE_API_BASE_URL: https://ci.invalid
