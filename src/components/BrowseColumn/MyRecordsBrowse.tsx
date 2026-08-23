@@ -1,5 +1,6 @@
 import { useOpen777 } from '../../state/useOpen777';
 import { useRecordingsApi } from '../../hooks/useRecordingsApi';
+import { pathLabel } from '../../lib/pathMapping';
 import type { RecordingRow } from '../../lib/api';
 
 const STATUS_COLOR: Record<string, string> = {
@@ -31,7 +32,7 @@ export default function MyRecordsBrowse() {
         return (
           <div key={r.id} onClick={() => setSelected(r.id)} style={{ padding: '12px 13px', borderRadius: 13, cursor: 'pointer', marginBottom: 4, background: active ? 'rgba(157,107,255,.1)' : 'transparent', boxShadow: active ? 'inset 0 0 0 1px rgba(157,107,255,.3)' : 'inset 0 0 0 1px var(--line)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <span style={{ fontFamily: 'var(--serif)', fontWeight: 600, fontSize: 16, color: 'var(--cream)' }}>Path {r.pathNumber}</span>
+              <span style={{ fontFamily: 'var(--serif)', fontWeight: 600, fontSize: 16, color: 'var(--cream)' }}>{pathLabel(r.pathNumber)}</span>
               <span style={{ marginLeft: 'auto', fontSize: 10, color: sc, textTransform: 'uppercase', letterSpacing: '.08em' }}>{r.status}</span>
             </div>
             <div style={{ fontSize: 11, color: 'var(--faint)', marginTop: 4 }}>{new Date(r.recordedAt).toLocaleString()} · {fmtDur(r.durationMs)}</div>

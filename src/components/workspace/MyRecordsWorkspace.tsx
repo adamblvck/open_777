@@ -3,6 +3,8 @@ import { useOpen777 } from '../../state/useOpen777';
 import { useAuth } from '../../hooks/useAuth';
 import { api, type RecordingDetail } from '../../lib/api';
 import VisionReportView from '../report/VisionReportView';
+import PathSuggestions from './PathSuggestions';
+import { pathLabel } from '../../lib/pathMapping';
 
 function Empty({ title, sub }: { title: string; sub: string }) {
   return (
@@ -19,6 +21,7 @@ export default function MyRecordsWorkspace() {
   const searchFor = useOpen777((s) => s.searchFor);
   const setSelected = useOpen777((s) => s.setSelectedRecording);
   const flash = useOpen777((s) => s.flash);
+  const invalidateRecords = useOpen777((s) => s.invalidateRecords);
   const { isSignedIn } = useAuth();
   const [detail, setDetail] = useState<RecordingDetail | null>(null);
 
@@ -70,11 +73,25 @@ export default function MyRecordsWorkspace() {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 18 }}>
           <div>
             <div style={{ fontWeight: 300, letterSpacing: '.3em', textTransform: 'uppercase', fontSize: 11, color: 'var(--purpledim)' }}>Recorded scrying</div>
-            <div style={{ fontFamily: 'var(--serif)', fontWeight: 600, fontSize: 32, color: 'var(--cream)' }}>Path {rec.pathNumber}</div>
+            <div style={{ fontFamily: 'var(--serif)', fontWeight: 600, fontSize: 32, color: 'var(--cream)' }}>{pathLabel(rec.pathNumber)}</div>
             <div style={{ fontSize: 12, color: 'var(--faint)', marginTop: 2 }}>{new Date(rec.recordedAt).toLocaleString()} · status: {rec.status}{inFlight ? ' (polling…)' : ''}</div>
           </div>
           <span onClick={del} style={{ fontSize: 12, padding: '8px 14px', borderRadius: 999, boxShadow: 'inset 0 0 0 1px var(--line2)', color: 'var(--danger)', cursor: 'pointer' }}>Delete</span>
         </div>
+
+        {/* Filed under General means nobody told us what this was. Offer to read
+            the path out of the transcript rather than leaving it unplaced. */}
+        {rec.pathNumber === 0 ? (
+          <PathSuggestions
+            recordingId={rec.id}
+            currentPath={rec.pathNumber}
+            onFiled={(n) => {
+              flash(`Filed under ${pathLabel(n)}.`);
+              setDetail((d) => (d ? { ...d, recording: { ...d.recording, pathNumber: n } } : d));
+              invalidateRecords(); // the browse list still shows the old path
+            }}
+          />
+        ) : null}
 
         {detail.audioUrl ? (
           <audio controls src={detail.audioUrl} style={{ width: '100%', marginBottom: 18 }} />

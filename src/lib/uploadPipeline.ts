@@ -11,7 +11,54 @@ export interface UploadResult {
   status: string;
 }
 
-export async function uploadRecording(rec: RecordResult, pathNumber: number): Promise<UploadResult> {
+export interface UploadOpts {
+  /** Called with 0..1 as bytes reach S3. Only fires for the direct PUT. */
+  onProgress?: (fraction: number, loaded: number, total: number) => void;
+  signal?: AbortSignal;
+}
+
+/**
+ * PUT the blob straight to S3 with upload progress.
+ *
+ * XHR rather than fetch: fetch exposes no upload-progress event, and these
+ * files run to tens of megabytes — a progress-less minute of silence reads as
+ * a hang. Send ONLY presign.headers; any extra header (Authorization, etc.)
+ * invalidates the presigned signature.
+ */
+function putToS3(
+  url: string,
+  headers: Record<string, string>,
+  body: Blob,
+  opts: UploadOpts = {}
+): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('PUT', url, true);
+    for (const [k, v] of Object.entries(headers)) xhr.setRequestHeader(k, v);
+
+    xhr.upload.onprogress = (e) => {
+      if (e.lengthComputable) opts.onProgress?.(e.loaded / e.total, e.loaded, e.total);
+    };
+    xhr.onload = () =>
+      xhr.status >= 200 && xhr.status < 300
+        ? resolve()
+        : reject(new Error(`S3 PUT failed: ${xhr.status} ${String(xhr.responseText ?? '').slice(0, 200)}`));
+    xhr.onerror = () => reject(new Error('S3 PUT failed: network error'));
+    xhr.onabort = () => reject(new DOMException('Upload aborted', 'AbortError'));
+
+    if (opts.signal) {
+      if (opts.signal.aborted) return reject(new DOMException('Upload aborted', 'AbortError'));
+      opts.signal.addEventListener('abort', () => xhr.abort(), { once: true });
+    }
+    xhr.send(body);
+  });
+}
+
+export async function uploadRecording(
+  rec: RecordResult,
+  pathNumber: number,
+  opts: UploadOpts = {}
+): Promise<UploadResult> {
   const presign = await api.presignUpload({
     pathNumber,
     sessionId: rec.sessionId,
@@ -21,12 +68,11 @@ export async function uploadRecording(rec: RecordResult, pathNumber: number): Pr
     contentType: rec.mimeType, // exact MediaRecorder mime — Whisper accepts webm
   });
 
-  // Direct-to-S3 PUT. Send ONLY presign.headers — adding Authorization or
-  // other headers breaks the presigned-URL signature. No credentials.
-  const put = await fetch(presign.uploadUrl, { method: 'PUT', headers: presign.headers, body: rec.blob });
-  if (!put.ok) {
+  try {
+    await putToS3(presign.uploadUrl, presign.headers, rec.blob, opts);
+  } catch (err) {
     await api.finalizeRecording({ recordingId: presign.recordingId, failed: true }).catch(() => undefined);
-    throw new Error(`S3 PUT failed: ${put.status}`);
+    throw err;
   }
 
   const finalize = await api.finalizeRecording({ recordingId: presign.recordingId });

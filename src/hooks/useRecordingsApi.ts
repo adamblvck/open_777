@@ -1,9 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
 import { api, type RecordingRow } from '../lib/api';
 import { useAuth } from './useAuth';
+import { useOpen777 } from '../state/useOpen777';
 
 export function useRecordingsApi() {
   const { isSignedIn } = useAuth();
+  // Refetch when something elsewhere changes a recording (e.g. re-filing a path).
+  const version = useOpen777((s) => s.recordsVersion);
   const [recordings, setRecordings] = useState<RecordingRow[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -23,7 +26,7 @@ export function useRecordingsApi() {
     } finally {
       setLoading(false);
     }
-  }, [isSignedIn]);
+  }, [isSignedIn, version]);
 
   useEffect(() => {
     refresh();

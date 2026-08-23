@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import type { RecordingDetail, ReportStatusResponse, VisionReport } from '../../lib/apiTypes';
 import { api } from '../../lib/api';
 import { formatClock, normalizeReport, scoreTone } from '../../lib/report/normalize';
+import { exportFilename, reportToJson, reportToMarkdown } from '../../lib/report/reportMarkdown';
 import { Button, Card, Chip, EmptyState, SectionLabel } from '../ui';
 import XRayPanel from './XRayPanel';
 import SceneSection from './SceneSection';
@@ -183,6 +184,28 @@ export default function VisionReportView({
   const visible = tabs.filter((t) => t.show);
   const activeTab = visible.some((t) => t.key === tab) ? tab : visible[0]?.key ?? 'reading';
 
+  /**
+   * Save the reading to disk. Markdown for reading and keeping, JSON for the
+   * complete record. Both are produced by the serialiser the phone shares, so
+   * a reading exported here and one AirDropped off the phone are the same file.
+   */
+  const downloadReport = (r: VisionReport, format: 'md' | 'json') => {
+    const opts = {
+      transcript: detail.transcription?.rawText ?? null,
+      pathLabel: [`Path ${r.pathNumber}`, meta?.letter, meta?.tarot].filter(Boolean).join(' · '),
+      exportedAt: new Date().toISOString(),
+    };
+    const body = format === 'md' ? reportToMarkdown(r, opts) : reportToJson(r, opts);
+    const url = URL.createObjectURL(
+      new Blob([body], { type: format === 'md' ? 'text/markdown' : 'application/json' }),
+    );
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = exportFilename(r, format, opts);
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div style={{ animation: 'o7rise .35s ease both' }}>
       {/* Header */}
@@ -216,16 +239,28 @@ export default function VisionReportView({
               {report?.status === 'partial' ? <Chip tone="#b9a44a">partial</Chip> : null}
             </div>
           </div>
-          {!normalized.sections.verified && recordingId ? (
-            <Button
-              variant="ghost"
-              onClick={() => {
-                void api.verifyReport(recordingId).catch(() => undefined);
-              }}
-            >
-              Run deep verify
-            </Button>
-          ) : null}
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+            {report ? (
+              <>
+                <Button variant="ghost" onClick={() => downloadReport(report, 'md')}>
+                  Export reading
+                </Button>
+                <Button variant="ghost" onClick={() => downloadReport(report, 'json')}>
+                  Export data
+                </Button>
+              </>
+            ) : null}
+            {!normalized.sections.verified && recordingId ? (
+              <Button
+                variant="ghost"
+                onClick={() => {
+                  void api.verifyReport(recordingId).catch(() => undefined);
+                }}
+              >
+                Run deep verify
+              </Button>
+            ) : null}
+          </div>
         </div>
         {normalized.reason ? (
           <div style={{ fontSize: 12, color: 'var(--info-text)', marginTop: 10 }}>{normalized.reason}</div>

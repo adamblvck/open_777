@@ -7,6 +7,7 @@ import { uploadRecording, pollUntilComplete } from '../../lib/uploadPipeline';
 import { api, ApiError, type RecordingDetail } from '../../lib/api';
 import { useEntitlement } from '../../hooks/useEntitlement';
 import VisionReportView from '../report/VisionReportView';
+import UploadTray from './UploadTray';
 import { ritualContent, RITUAL_PREP } from '../../lib/ritualContent';
 
 const WAVE = Array.from({ length: 28 }, (_, i) => Math.round(18 + (Math.sin(i * 1.7) * 0.5 + 0.5) * 22));
@@ -167,6 +168,18 @@ export default function ScryingWorkspace() {
             <div style={{ fontSize: 11.5, color: 'var(--faint)', marginTop: 8 }}>{!isSignedIn ? 'Sign in (bottom-left) to upload this recording for cloud transcription & analysis. You can still analyse text locally below.' : 'The backend database is offline — cloud upload is unavailable. Local text analysis still works.'}</div>
           ) : null}
         </div>
+
+        {/* batch file upload — existing recordings, dragged in from disk */}
+        <div style={{ fontSize: 11, letterSpacing: '.24em', textTransform: 'uppercase', color: 'var(--faint)', margin: '4px 0 10px' }}>Or upload recordings you already have</div>
+        {cloudReady ? (
+          <UploadTray />
+        ) : (
+          <div style={{ borderRadius: 18, background: 'var(--card)', boxShadow: 'inset 0 0 0 1px var(--line2)', padding: '18px 20px', marginBottom: 16, fontSize: 12, color: 'var(--faint)' }}>
+            {!isSignedIn
+              ? 'Sign in (bottom-left) to drag recordings in for cloud transcription & analysis.'
+              : 'The backend database is offline — cloud upload is unavailable.'}
+          </div>
+        )}
 
         <div style={{ fontSize: 11, letterSpacing: '.24em', textTransform: 'uppercase', color: 'var(--faint)', margin: '4px 0 10px' }}>Or work from text</div>
         <div style={{ display: 'flex', gap: 10, marginBottom: 12 }}>
