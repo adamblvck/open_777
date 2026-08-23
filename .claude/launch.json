@@ -4,8 +4,8 @@
     {
       "name": "open777-desktop",
       "runtimeExecutable": "/Users/blvck/.nvm/versions/node/v20.19.5/bin/node",
-      "runtimeArgs": ["node_modules/vite/bin/vite.js", "--port", "3000", "--strictPort"],
-      "port": 3000
+      "runtimeArgs": ["node_modules/vite/bin/vite.js", "--port", "5173", "--strictPort"],
+      "port": 5173
     }
   ]
 }

@@ -446,4 +446,72 @@ export interface BillingStatus {
   active: boolean;
   expiresAt: string | null;
   freeTierPath: number;
+  /** Unspent transcript credits from one-off packs. */
+  credits: number;
+  /** Lifetime credits granted — for "14 of 96 used". */
+  creditsGranted: number;
+  mentorship: boolean;
+  mentorshipExpiresAt: string | null;
+  /**
+   * Which provider backs the active subscription; null when there isn't one.
+   * Decides whether "Manage" opens the Stripe portal or the store's own
+   * subscription sheet — an IAP subscriber has no Stripe customer to send to
+   * the portal, and vice versa.
+   */
+  provider: 'stripe' | 'revenuecat' | null;
+}
+
+export interface PathEvidence {
+  kind: 'letter' | 'trump' | 'attribution' | 'letter_meaning' | 'intelligence' | 'explicit_number';
+  term: string;
+  weight: number;
+  quote: string;
+}
+
+export interface PathSuggestion {
+  pathNumber: number;
+  score: number;
+  confidence: 'high' | 'medium' | 'low';
+  label: string;
+  evidence: PathEvidence[];
+}
+
+export interface PathSuggestionsResponse {
+  recordingId: string;
+  pathNumber: number;
+  /** False while the recording has no transcript yet. */
+  ready: boolean;
+  suggestions: PathSuggestion[];
+}
+
+export type ProductId = 'tree_pack' | 'adept_circle' | 'monthly';
+
+export interface CatalogProduct {
+  id: ProductId;
+  mode: 'payment' | 'subscription';
+  name: string;
+  tagline: string;
+  /** null = unlimited while the subscription is active. */
+  credits: number | null;
+  priceCents: number;
+  currency: string;
+  interval: string | null;
+  features: string[];
+  mentorship: boolean;
+  featured: boolean;
+  /** False when Stripe has no price id for it — render the card, disable the button. */
+  purchasable: boolean;
+  /**
+   * Store SKU (App Store / Play / RevenueCat) when this product is sold in-app.
+   * null on web-only products, which have no store product by design.
+   */
+  storeProductId: string | null;
+}
+
+export interface CatalogResponse {
+  configured: boolean;
+  currency: string;
+  freeTierPath: number;
+  mentorshipWeeks: number;
+  products: CatalogProduct[];
 }

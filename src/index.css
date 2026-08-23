@@ -85,6 +85,8 @@ textarea, input, button, select { font-family: var(--ui); }
 @keyframes o7spin     { from { transform:rotate(0); } to { transform:rotate(360deg); } }
 @keyframes o7float    { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-10px); } }
 @keyframes o7hexdraw  { to { stroke-dashoffset: 0; } }
+/* Indeterminate rail: server-side work has no percentage to report. */
+@keyframes o7march    { from { background-position:0 0; } to { background-position:24px 0; } }
 
 /* Accessibility: neutralise looping motion for users who ask for it. */
 @media (prefers-reduced-motion: reduce) {

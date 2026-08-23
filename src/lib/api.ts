@@ -13,7 +13,7 @@ export class ApiError extends Error {
 }
 
 interface FetchOpts {
-  method?: 'GET' | 'POST' | 'PUT' | 'DELETE';
+  method?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
   body?: unknown;
   headers?: Record<string, string>;
   noAuth?: boolean;
@@ -64,6 +64,9 @@ import type {
   RecordingRow,
   RecordingDetail,
   BillingStatus,
+  CatalogResponse,
+  ProductId,
+  PathSuggestionsResponse,
   VisionReport,
   ReportStatusResponse,
   SearchResponse,
@@ -88,7 +91,10 @@ export const api = {
 
   // ── Billing (Stripe) ──
   billingStatus: () => request<BillingStatus>('/billing/status'),
-  startCheckout: () => request<{ url: string }>('/billing/checkout-session', { method: 'POST' }),
+  /** Public — the pricing page renders signed-out. */
+  billingCatalog: () => request<CatalogResponse>('/billing/catalog', { noAuth: true }),
+  startCheckout: (productId: ProductId = 'monthly') =>
+    request<{ url: string }>('/billing/checkout-session', { method: 'POST', body: { productId } }),
   billingPortal: () => request<{ url: string }>('/billing/portal-session', { method: 'POST' }),
 
   // ── Upload ──
@@ -104,6 +110,13 @@ export const api = {
 
   getRecording: (id: string) => request<RecordingDetail>(`/recordings/${id}`),
   deleteRecording: (id: string) => request<void>(`/recordings/${id}`, { method: 'DELETE' }),
+
+  /** Which path does this transcript actually point at? Evidence-scored. */
+  pathSuggestions: (id: string) => request<PathSuggestionsResponse>(`/recordings/${id}/path-suggestions`),
+
+  /** Re-file a recording under a different path (metadata only, no re-run). */
+  repathRecording: (id: string, pathNumber: number) =>
+    request<{ recording: RecordingRow }>(`/recordings/${id}`, { method: 'PATCH', body: { pathNumber } }),
 
   // ── Vision report ──
   /**

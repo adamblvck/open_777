@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { api, ApiError, type BillingStatus } from '../lib/api';
+import { api, ApiError, type BillingStatus, type ProductId } from '../lib/api';
 import { useAuth } from './useAuth';
 
 export interface Entitlement {
@@ -7,19 +7,23 @@ export interface Entitlement {
   loading: boolean;
   /** True once we know the user has an active paid subscription. */
   active: boolean;
+  /** Unspent one-off transcript credits. */
+  credits: number;
+  /** Subscription OR credits — i.e. can process a non-free path right now. */
+  canProcess: boolean;
   /** Free path (Tau/32) everyone may process without paying. */
   freeTierPath: number;
-  /** Whether processing this path requires a subscription the user lacks. */
+  /** Whether processing this path is currently blocked for the user. */
   needsSubscription: (pathNumber: number) => boolean;
-  /** Start Stripe Checkout and redirect the browser to it. */
-  subscribe: () => Promise<void>;
+  /** Start Stripe Checkout for a product and redirect the browser to it. */
+  subscribe: (productId?: ProductId) => Promise<void>;
   /** Open the Stripe billing portal (manage/cancel). */
   manage: () => Promise<void>;
   refetch: () => void;
 }
 
 /**
- * Subscription entitlement for the signed-in user. Mirrors the API's
+ * Subscription + credit entitlement for the signed-in user. Mirrors the API's
  * GET /billing/status and drives the paywall in the scrying workspace.
  */
 export function useEntitlement(): Entitlement {
@@ -50,15 +54,20 @@ export function useEntitlement(): Entitlement {
 
   const freeTierPath = status?.freeTierPath ?? 32;
   const active = status?.active ?? false;
+  const credits = status?.credits ?? 0;
+  const canProcess = active || credits > 0;
 
   return {
     status,
     loading,
     active,
+    credits,
+    canProcess,
     freeTierPath,
-    needsSubscription: (pathNumber: number) => pathNumber !== freeTierPath && !active,
-    subscribe: async () => {
-      const { url } = await api.startCheckout();
+    // A credit is as good as a subscription for getting one recording through.
+    needsSubscription: (pathNumber: number) => pathNumber !== freeTierPath && !canProcess,
+    subscribe: async (productId: ProductId = 'tree_pack') => {
+      const { url } = await api.startCheckout(productId);
       window.location.href = url;
     },
     manage: async () => {

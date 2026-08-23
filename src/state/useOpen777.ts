@@ -53,6 +53,12 @@ interface State {
   selectedGlossarySlug: string;
   selectedCardColumn: number | null;
   selectedRecordingId: string;
+  /**
+   * Bumped whenever a recording's metadata changes outside the browse list —
+   * re-filing a path, say. The list hook keeps its own state per instance, so
+   * this counter is what tells it to refetch.
+   */
+  recordsVersion: number;
   /** Path currently focused on the Tree map, or null for none. */
   treePath: number | null;
   /** Query carried into the search mode (from a motif chip, a 777 row…). */
@@ -91,6 +97,8 @@ interface State {
   openCard: (column: number) => void;
   setJourneyScreen: (screen: 'map' | 'ritual' | 'witness' | 'hexagram', path?: number | null) => void;
   setSelectedRecording: (id: string) => void;
+  /** Tell the records list its data is stale. */
+  invalidateRecords: () => void;
   setTreePath: (n: number | null) => void;
   /** Jump into search with a query already applied. */
   searchFor: (q: string, scope?: string) => void;
@@ -133,6 +141,7 @@ export const useOpen777 = create<State>()(
       selectedGlossarySlug: '',
       selectedCardColumn: null,
       selectedRecordingId: '',
+      recordsVersion: 0,
       treePath: null,
       searchQuery: '',
       searchScope: 'all',
@@ -253,6 +262,7 @@ export const useOpen777 = create<State>()(
       setJourneyScreen: (screen, path) =>
         set((s) => ({ journeyScreen: screen, journeyPath: path !== undefined ? path : s.journeyPath })),
       setSelectedRecording: (id) => set({ selectedRecordingId: id }),
+      invalidateRecords: () => set((s) => ({ recordsVersion: s.recordsVersion + 1 })),
       setTreePath: (n) => set({ treePath: n }),
       searchFor: (q, scope) =>
         set({ searchQuery: q, searchScope: scope ?? 'all', mode: 'search' }),
