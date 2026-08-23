@@ -7,7 +7,21 @@ import { VitePWA } from 'vite-plugin-pwa';
 //   Netlify / dev → base '/'   ·   `DEPLOY_TARGET=ghpages vite build` → '/open_777/'
 const base = process.env.DEPLOY_TARGET === 'ghpages' ? '/open_777/' : '/';
 
-export default defineConfig({
+export default defineConfig(({ command }) => {
+  // Fail the build, not the browser. src/lib/api.ts throws at runtime when this
+  // is missing, but a build that succeeds and then white-screens still gets
+  // deployed — Netlify only knows the build exited 0. Checking here means a
+  // misconfigured site never goes live in the first place.
+  if (command === 'build' && !process.env.VITE_API_BASE_URL) {
+    throw new Error(
+      'VITE_API_BASE_URL is not set.\n' +
+        'A production build without it would call http://localhost:3777 — the visitor\'s own machine.\n' +
+        'Netlify: Site settings → Environment variables.\n' +
+        'Locally:  VITE_API_BASE_URL=https://your-api npm run build'
+    );
+  }
+
+  return {
   base,
   server: { port: 3000 },
   build: { outDir: 'dist' },
@@ -36,6 +50,7 @@ export default defineConfig({
         cleanupOutdatedCaches: true,
       },
       devOptions: { enabled: false },
-    }),
-  ],
+      }),
+    ],
+  };
 });

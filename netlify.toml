@@ -5,9 +5,13 @@
 [build.environment]
   CI = "false"
   NODE_VERSION = "20"
-  # Without this the build bakes in the http://localhost:3777 fallback from
-  # src/lib/api.ts. Override per-site in the Netlify UI once the API is deployed.
-  VITE_API_BASE_URL = "http://localhost:3777"
+  # VITE_API_BASE_URL is deliberately NOT set here. It used to be pinned to
+  # http://localhost:3777 "until the API is deployed", which meant every
+  # production deploy shipped a site calling the visitor's own machine — and
+  # because it was set, the missing-value case never surfaced. Set it per-site
+  # in Site settings → Environment variables. src/lib/api.ts now throws on a
+  # production build without it, so a misconfigured deploy fails loudly instead
+  # of looking like a backend outage.
 
 [[redirects]]
   from = "/*"

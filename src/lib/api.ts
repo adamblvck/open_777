@@ -1,9 +1,29 @@
 // Open777 HTTP API client (web). Ported from open777Native/services/api.ts.
-// Base URL from VITE_API_BASE_URL (default http://localhost:3777). Cookie session
-// (credentials:'include') + bearer-token mirror for non-auth calls.
+// Base URL from VITE_API_BASE_URL. Bearer token primary (see lib/auth.ts),
+// cookie session as a fallback where the browser still allows it.
 import { getSessionToken } from './auth-token';
 
-export const API_BASE_URL: string = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:3777';
+function resolveBaseUrl(): string {
+  const configured = import.meta.env.VITE_API_BASE_URL;
+  if (configured) return configured;
+
+  // Vite inlines this at build time, so a production bundle that reached here
+  // was built without the variable set. Falling back to localhost would ship a
+  // site that calls the visitor's own machine and fails every request with a
+  // connection error — which reads as "the API is down" rather than "the deploy
+  // is misconfigured". netlify.toml used to paper over this by baking in the
+  // localhost value, which meant the fallback was never noticed.
+  if (import.meta.env.PROD) {
+    throw new Error(
+      '[api] VITE_API_BASE_URL is not set in this production build. ' +
+        'Set it in the Netlify site environment (Site settings → Environment variables) ' +
+        'and redeploy.'
+    );
+  }
+  return 'http://localhost:3777';
+}
+
+export const API_BASE_URL: string = resolveBaseUrl();
 
 export class ApiError extends Error {
   constructor(public status: number, message: string, public code?: string, public body?: unknown) {
