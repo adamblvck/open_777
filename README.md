@@ -76,3 +76,7 @@ npm run deploy
 ```
 
 The command above will build an optimized Standalone React Build, then commit this data the gh-pages branch. In GitHub this deployment can then be selected in Settings>Pages, allowing for free gitHub pages deployment.
+
+## License
+
+The code and the correspondence dataset are released under the [MIT License](LICENSE). The source text, Liber 777 (1909) by Aleister Crowley, is in the public domain. If you reuse the dataset, please keep the credits listed under About.
