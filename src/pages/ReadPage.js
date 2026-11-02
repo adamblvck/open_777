@@ -42,7 +42,8 @@ function ReadPage() {
             </div>
 
             <div className="max-w-6xl mx-auto px-4 pb-12">
-                <BookReader book={currentBook.data} />
+                {/* Reset reader state before rendering a different book. */}
+                <BookReader key={currentBook.key} book={currentBook.data} />
             </div>
 
             <footer className="border-t border-gray-700/50 py-6 px-4">
